@@ -1,6 +1,8 @@
 # robots.txt — padelpulselive.es
 User-agent: *
 Allow: /
+# Material de marketing: accesible por URL, pero fuera del índice
+Disallow: /marketing/
 
 # Rastreadores de IA permitidos (visibilidad de marca)
 User-agent: GPTBot

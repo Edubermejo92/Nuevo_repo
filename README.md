@@ -48,6 +48,30 @@ desplegarse en **Netlify**.
 - **Puntuación:** al mejor de N sets, punto de oro o ventaja, doble falta,
   tie-break y super tie-break. Deshacer punto. Historial de partidos.
 
+## Sistema de diseño
+
+La paleta y la tipografía están tomadas directamente de la app (del
+`tailwind.config` de su PWA), para que web y aplicación se vean igual:
+
+| Token | Valor | Origen en la app |
+|---|---|---|
+| `--pulse` | `#00fd87` | `primary-container` |
+| `--pulse-soft` | `#a4ffb9` | `primary` |
+| `--on-pulse` | `#006532` | `on-primary` |
+| `--court` | `#00cdee` | `tertiary-dim` |
+| `--bg` | `#0e0e0e` | `background` / `surface` |
+| `--bg-alt` | `#131313` | `surface-container-low` |
+| `--surface` | `#1a1919` | `surface-container` |
+| `--surface-strong` | `#201f1f` | `surface-container-high` |
+| `--border-strong` | `#494847` | `outline-variant` |
+| `--text` | `#ffffff` | `on-surface` |
+| `--muted` | `#adaaaa` | `on-surface-variant` |
+
+Tipografía: **Lexend**, la misma que usa la app.
+
+Si cambias el diseño de la app, actualiza estos tokens en el bloque `:root`
+de `assets/css/styles.css` y la web se adapta entera.
+
 ## Titular (páginas legales)
 
 EBLDigital · NIF 05943392P · Calle Fermín Caballero 30, 3D, 28034 Madrid ·

@@ -11,8 +11,32 @@ marketing/
 │   └── base.css      sistema de diseño (colores, tipografía, componentes)
 ├── fuentes/          logotipo, pala e icono de la app
 ├── salida/           los PNG exportados
-└── render.js         exporta cada .art a salida/<id>.png
+├── render.js         exporta cada .art a salida/<id>.png
+├── empaquetar.sh     genera el ZIP descargable
+├── LEEME.md          instrucciones que viajan dentro del ZIP
+└── PadelPulseLive-kit-marketing.zip
 ```
+
+## El ZIP descargable
+
+`PadelPulseLive-kit-marketing.zip` reorganiza el kit para usarlo, no para
+desarrollarlo: `1-google-play/`, `2-web-y-redes/`, `3-logotipos/` y
+`4-editable/`, con los ficheros renombrados por su función y su tamaño.
+
+Se regenera tras cualquier cambio con:
+
+```bash
+bash marketing/empaquetar.sh
+```
+
+El script reescribe las rutas de `piezas.html` a relativas, de modo que la
+carpeta `4-editable/` funciona por sí sola fuera del repositorio: basta con
+servirla y ejecutar `node render.js`.
+
+Como el sitio se publica desde la raíz, el ZIP queda accesible en
+`/marketing/PadelPulseLive-kit-marketing.zip`. Está fuera del índice por
+`robots.txt`, pero cualquiera con el enlace puede descargarlo: no pongas ahí
+nada que no quieras público.
 
 ## Regenerar las piezas
 

@@ -1083,3 +1083,32 @@ code {
   color: var(--text);
   white-space: nowrap;
 }
+
+/* Rejilla de idiomas disponibles */
+.langs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.langs li { margin: 0; }
+.langs li span {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.langs li span:hover {
+  border-color: var(--pulse);
+  background: var(--surface-strong);
+  transform: translateY(-2px);
+}

@@ -10,7 +10,7 @@
   --on-pulse: #006532;       /* on-primary */
   --court: #00cdee;          /* tertiary-dim */
   --court-soft: #7ee6ff;     /* tertiary */
-  --lime: #a4ffb9;
+  --lime: #8fd117;   /* verde lima del logotipo */
 
   /* Superficies — escala neutra de la app */
   --bg: #0e0e0e;                 /* background / surface */
@@ -264,7 +264,7 @@ li { margin-bottom: 0.5em; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.12rem;
@@ -272,8 +272,14 @@ li { margin-bottom: 0.5em; }
   letter-spacing: -0.02em;
   text-decoration: none !important;
 }
-.brand__mark { width: 36px; height: 36px; flex: none; }
-.brand__name em { font-style: normal; color: var(--pulse); }
+.brand__logo {
+  height: 50px;
+  width: auto;
+  flex: none;
+  display: block;
+}
+.footer .brand__logo { height: 62px; }
+@media (max-width: 520px) { .brand__logo { height: 40px; } }
 
 .nav__links {
   display: flex;

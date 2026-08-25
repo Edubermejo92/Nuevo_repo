@@ -1,6 +1,6 @@
 # padelpulselive.es
 
-Web oficial de **Padel Pulse Live**, la app marcador de pádel con árbitro IA y
+Web oficial de **PadelPulse Live**, la app marcador de pádel con árbitro IA y
 voz para móvil Android y reloj Wear OS.
 
 Sitio estático (HTML + CSS + JS sin dependencias ni build) preparado para
@@ -24,7 +24,7 @@ desplegarse en **Netlify**.
 └── assets/
     ├── css/styles.css    Sistema de diseño completo
     ├── js/main.js        Navegación, revelado y consentimiento de cookies
-    └── img/              Logo, favicon e imagen Open Graph (1200×630)
+    └── img/              logo.png (lockup), icon.png (pala) y og-image.png
 ```
 
 ---
@@ -68,6 +68,16 @@ La paleta y la tipografía están tomadas directamente de la app (del
 | `--muted` | `#adaaaa` | `on-surface-variant` |
 
 Tipografía: **Lexend**, la misma que usa la app.
+
+El logotipo (`assets/img/logo.png`) y el icono (`assets/img/icon.png`) se han
+extraído del propio bundle de la PWA y se les ha recortado el fondo negro con
+un relleno por inundación desde los bordes, de modo que los negros interiores
+del dibujo se conservan y el logotipo se integra sobre `#0e0e0e` sin caja.
+
+El verde del logotipo (`#80d010`, lima) no es el mismo que el verde de la
+interfaz de la app (`#00fd87`, mint). Se respeta esa dualidad: el mint manda
+en la interfaz de la web y el lima se usa en la pelota del marcador, donde
+además es el color realista de una bola de pádel.
 
 Si cambias el diseño de la app, actualiza estos tokens en el bloque `:root`
 de `assets/css/styles.css` y la web se adapta entera.

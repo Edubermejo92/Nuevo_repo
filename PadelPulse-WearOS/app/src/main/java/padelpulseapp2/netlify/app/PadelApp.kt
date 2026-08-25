@@ -353,6 +353,7 @@ fun PairScreen(engine: GameEngine, activity: MainActivity) {
     val es = engine.lang == "es"
     var code by remember { mutableStateOf(listOf<Int>()) }
     var sentFor by remember { mutableStateOf("") }
+    var autoTried by remember { mutableStateOf(false) }
 
     // Cuando el movil acepta, entramos al marcador solos
     LaunchedEffect(PhoneLink.paired) {
@@ -360,6 +361,17 @@ fun PairScreen(engine: GameEngine, activity: MainActivity) {
             delay(1100)
             activity.startTimer()
             engine.currentScreen = "score"
+        }
+    }
+
+    // Zero-touch: en cuanto el reloj ve el movil, intenta emparejar solo, sin
+    // esperar a que nadie teclee nada. El movil acepta automaticamente si tiene
+    // "Vincular sin codigo" activado (lo esta por defecto). Si el movil lo tiene
+    // desactivado, esto no hace nada y queda el codigo manual como alternativa.
+    LaunchedEffect(PhoneLink.connected, PhoneLink.paired) {
+        if (PhoneLink.connected && !PhoneLink.paired && !autoTried) {
+            autoTried = true
+            activity.sendPairRequest("AUTO")
         }
     }
 
@@ -378,6 +390,7 @@ fun PairScreen(engine: GameEngine, activity: MainActivity) {
         PhoneLink.paired -> if (es) "¡VINCULADO!" else "LINKED!"
         PhoneLink.lastError == "codigo" -> if (es) "CODIGO INCORRECTO" else "WRONG CODE"
         !PhoneLink.connected -> if (es) "ABRE LA APP DEL MOVIL" else "OPEN THE PHONE APP"
+        autoTried && code.isEmpty() -> if (es) "EMPAREJANDO…" else "PAIRING…"
         code.size == 4 -> if (es) "ESPERANDO AL MOVIL…" else "WAITING FOR PHONE…"
         else -> if (es) "CODIGO DEL MOVIL" else "CODE FROM PHONE"
     }

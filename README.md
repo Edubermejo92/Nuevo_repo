@@ -29,46 +29,31 @@ desplegarse en **Netlify**.
 
 ---
 
-## Antes de publicar: 3 cosas pendientes
+## Datos de la app (verificados en el app bundle)
 
-### 1. Enlace real de Google Play
+- **Package name:** `padelpulseapp2.netlify.app`
+- **Ficha:** https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app
+- **Plataformas:** Android + Wear OS (Jetpack Compose)
+- **Modelo:** aplicación de pago, cobro único. **El precio no se muestra en la
+  web**: se remite siempre a la ficha de Google Play, que es la fuente
+  actualizada y evita tener que tocar el sitio si cambia.
+- **12 idiomas:** Español, English, Français, Deutsch, Italiano, Português,
+  Nederlands, Svenska, Suomi, Русский, 日本語, 한국어.
+- **Wear OS:** marcador siempre activo en la muñeca; un toque suma el punto a
+  favor y otro el punto en contra, con un segundo de margen antes de
+  contabilizarlo. Control del brillo y del sonido del reloj desde la app.
+- **Cuatro modos de control:** manda el móvil / manda el reloj / el reloj va
+  por su cuenta / el reloj solo muestra. Vinculación por Bluetooth con código
+  o sin código.
+- **Puntuación:** al mejor de N sets, punto de oro o ventaja, doble falta,
+  tie-break y super tie-break. Deshacer punto. Historial de partidos.
 
-Todos los CTA apuntan hoy a una **búsqueda** en Google Play, porque la ficha de
-la app no era accesible al construir la web. En cuanto tengas la URL definitiva
-(`https://play.google.com/store/apps/details?id=TU.PACKAGE.NAME`), sustitúyela
-en todo el sitio con un único comando:
+## Titular (páginas legales)
 
-```bash
-grep -rl "play.google.com/store/search" . --include="*.html" --include="*.toml" \
-  | xargs sed -i 's|https://play.google.com/store/search?q=Padel%20Pulse%20Live&amp;c=apps|https://play.google.com/store/apps/details?id=TU.PACKAGE.NAME|g; s|https://play.google.com/store/search?q=Padel%20Pulse%20Live&c=apps|https://play.google.com/store/apps/details?id=TU.PACKAGE.NAME|g'
-```
+EBLDigital · NIF 05943392P · Calle Fermín Caballero 30, 3D, 28034 Madrid ·
+ebldigital92@gmail.com (soporte y quejas).
 
-Revisa también `installUrl` y `downloadUrl` dentro del JSON-LD de `index.html`.
-
-### 2. Datos del titular en las páginas legales
-
-Las tres páginas legales llevan marcadores entre corchetes que **hay que
-rellenar** para que tengan validez:
-
-```bash
-grep -rn "\[RAZÓN SOCIAL\|\[NIF\|\[DIRECCIÓN" *.html
-```
-
-- `[RAZÓN SOCIAL O NOMBRE Y APELLIDOS DEL TITULAR]`
-- `[NIF O CIF]`
-- `[DIRECCIÓN POSTAL COMPLETA]`
-
-Los correos usados son `info@padelpulselive.es` y `privacidad@padelpulselive.es`:
-crea esos buzones o cámbialos por los tuyos.
-
-### 3. Verificar las capacidades descritas
-
-Los textos describen la app según lo previsto (historial, formatos
-configurables, sincronización móvil ↔ reloj, funcionamiento sin conexión).
-Ajusta cualquier frase que no corresponda con la versión publicada, sobre todo
-en `index.html` y en el bloque FAQ (que también alimenta el JSON-LD `FAQPage`).
-
----
+Los tres documentos legales están completos, sin marcadores pendientes.
 
 ## Despliegue en Netlify
 
@@ -118,6 +103,10 @@ Ya implementado:
 - `BreadcrumbList` en las páginas legales.
 - Open Graph y Twitter Card con imagen 1200×630 propia.
 - `sitemap.xml` + `robots.txt` con referencia al sitemap.
+- El JSON-LD **no declara `offers`**: al ser app de pago, publicar un precio
+  obliga a mantenerlo sincronizado y un precio erróneo penaliza. Si quieres
+  que Google muestre el precio en los resultados, hay que añadir el bloque
+  `offers` con el importe real y actualizarlo cuando cambie.
 - URLs limpias redirigidas con 301 hacia la URL canónica (`netlify.toml`).
 - Cabeceras de seguridad (HSTS, CSP, `X-Content-Type-Options`…) y caché larga
   para estáticos: ambas cosas puntúan en Core Web Vitals y en confianza.

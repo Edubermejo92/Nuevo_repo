@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     companion object {
         const val TAG = "PadelPulse"
-        const val APP_VERSION = "1.2.0"
+        const val APP_VERSION = "5.0.0"
         var webView: WebView? = null
         var instance: MainActivity? = null
     }

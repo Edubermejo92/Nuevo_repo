@@ -1,0 +1,14 @@
+{
+  "name": "Padel Pulse Live — Marcador de pádel",
+  "short_name": "Padel Pulse",
+  "description": "App marcador de pádel con árbitro IA y voz para móvil y Wear OS.",
+  "lang": "es-ES",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050810",
+  "theme_color": "#050810",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

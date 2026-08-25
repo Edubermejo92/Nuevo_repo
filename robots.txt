@@ -1,0 +1,15 @@
+# robots.txt — padelpulselive.es
+User-agent: *
+Allow: /
+
+# Rastreadores de IA permitidos (visibilidad de marca)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://padelpulselive.es/sitemap.xml

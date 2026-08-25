@@ -1,0 +1,113 @@
+# =============================================================================
+#  padelpulselive.es — configuración de Netlify
+#  Sitio estático sin build: se publica el contenido de la raíz del repo.
+# =============================================================================
+
+[build]
+  publish = "."
+  command = ""
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = false   # las URLs canónicas son las .html; ver redirecciones
+
+# ------------------------------------------------------------------ SEO ----
+# URLs limpias y variantes habituales -> 301 hacia la URL canónica.
+[[redirects]]
+  from = "/privacidad"
+  to = "/privacidad.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-de-privacidad"
+  to = "/privacidad.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cookies"
+  to = "/cookies.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-de-cookies"
+  to = "/cookies.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terminos"
+  to = "/terminos.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terminos-y-condiciones"
+  to = "/terminos.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal"
+  to = "/terminos.html"
+  status = 301
+  force = true
+
+# Landing de descarga: enlace corto compartible que lleva a la ficha de la app.
+# Cambia el destino cuando tengas la URL definitiva de la app en Google Play.
+[[redirects]]
+  from = "/descargar"
+  to = "/#descargar"
+  status = 301
+  force = true
+
+# Catch-all: cualquier ruta desconocida sirve el 404 propio.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# -------------------------------------------------------------- Cabeceras --
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+# Los HTML se revalidan siempre para que los cambios se vean al instante.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Los estáticos NO llevan hash en el nombre (no hay build), así que no pueden
+# marcarse como immutable: el navegador se quedaría con la versión antigua.
+# Se cachean una hora y se revalidan, sirviendo la copia vieja mientras tanto.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

@@ -273,13 +273,13 @@ li { margin-bottom: 0.5em; }
   text-decoration: none !important;
 }
 .brand__logo {
-  height: 50px;
+  height: 36px;
   width: auto;
   flex: none;
   display: block;
 }
-.footer .brand__logo { height: 62px; }
-@media (max-width: 520px) { .brand__logo { height: 40px; } }
+.footer .brand__logo { height: 46px; }
+@media (max-width: 520px) { .brand__logo { height: 30px; } }
 
 .nav__links {
   display: flex;

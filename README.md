@@ -142,8 +142,16 @@ Ya implementado:
   que Google muestre el precio en los resultados, hay que añadir el bloque
   `offers` con el importe real y actualizarlo cuando cambie.
 - URLs limpias redirigidas con 301 hacia la URL canónica (`netlify.toml`).
-- Cabeceras de seguridad (HSTS, CSP, `X-Content-Type-Options`…) y caché larga
-  para estáticos: ambas cosas puntúan en Core Web Vitals y en confianza.
+- Cabeceras de seguridad (HSTS, CSP, `X-Content-Type-Options`…) y política de
+  caché con revalidación.
+
+**Sobre la caché de estáticos:** al no haber build, los ficheros de `assets/`
+no llevan hash en el nombre, así que **no pueden marcarse como `immutable`** —
+el navegador se quedaría con la versión antigua indefinidamente. Se sirven con
+`max-age=3600, stale-while-revalidate=86400`. Además, las referencias a CSS,
+JS, logo e icono llevan un parámetro `?v=AAAAMMDD`: **súbelo cuando cambies
+uno de esos ficheros** para forzar la recarga en navegadores que ya tengan
+copia.
 - Sin dependencias JS externas: la página carga solo su propio CSS/JS y las
   tipografías de Google Fonts.
 

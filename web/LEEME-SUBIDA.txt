@@ -1,0 +1,106 @@
+================================================================================
+ PadelPulse Live — web para padelpulselive.com
+ Subida a Raiola Networks (cPanel)
+================================================================================
+
+QUÉ SUBIR
+---------
+El CONTENIDO de esta carpeta, no la carpeta en sí.
+
+En cPanel → Administrador de archivos → entra en public_html
+(o en addondomains/padelpulselive.com si lo has dado de alta como dominio
+adicional) y sube ahí dentro:
+
+    index.html
+    privacidad.html
+    cookies.html
+    terminos.html
+    404.html
+    robots.txt
+    sitemap.xml
+    site.webmanifest
+    .htaccess          <-- IMPORTANTE, ver más abajo
+    assets/            (carpeta completa)
+
+Este fichero (LEEME-SUBIDA.txt) NO hace falta subirlo.
+
+Lo más cómodo: sube el ZIP entero a public_html, usa "Extraer", y luego mueve
+el contenido de la carpeta padelpulselive-web/ a la raíz y borra la carpeta
+vacía y el ZIP.
+
+
+EL .HTACCESS ES UN FICHERO OCULTO
+---------------------------------
+Empieza por punto, así que el Administrador de archivos de cPanel NO lo muestra
+por defecto. Si no lo ves después de extraer:
+
+    Configuración (arriba a la derecha) → marca "Mostrar archivos ocultos"
+
+Comprueba que está en la raíz junto a index.html. Sin él no funcionan las
+redirecciones, ni el 404 propio, ni las cabeceras de seguridad.
+
+
+QUÉ HACE EL .HTACCESS
+---------------------
+  - Fuerza HTTPS.
+  - Redirige www.padelpulselive.com -> padelpulselive.com (301).
+  - URLs limpias: /privacidad, /cookies, /terminos, /aviso-legal... redirigen
+    con 301 a su .html.
+  - Página 404 propia.
+  - Cabeceras de seguridad: CSP, nosniff, X-Frame-Options, Referrer-Policy.
+  - Caché y compresión.
+
+Si prefieres que el dominio bueno sea www.padelpulselive.com en lugar de la
+raíz, dentro del .htaccess hay un bloque comentado que lo invierte. OJO: si lo
+cambias, hay que cambiar también las etiquetas <link rel="canonical"> y
+og:url de los cuatro HTML, el sitemap.xml y el robots.txt.
+
+
+DESPUÉS DE SUBIR, COMPRUEBA
+---------------------------
+  1. https://padelpulselive.com                 -> carga la web
+  2. https://www.padelpulselive.com             -> redirige a la anterior
+  3. http://padelpulselive.com                  -> salta a https
+  4. https://padelpulselive.com/privacidad      -> redirige a /privacidad.html
+  5. https://padelpulselive.com/loquesea        -> muestra el 404 propio
+  6. https://padelpulselive.com/sitemap.xml     -> se ve el XML
+
+Si el punto 4 o el 5 fallan, el .htaccess no se ha subido o está en la carpeta
+equivocada.
+
+
+CERTIFICADO SSL
+---------------
+En cPanel → SSL/TLS Status → activa Let's Encrypt (AutoSSL) para
+padelpulselive.com Y para www.padelpulselive.com. Hazlo ANTES de nada, porque
+el .htaccess fuerza HTTPS: sin certificado el navegador dará aviso de sitio
+no seguro.
+
+Cuando lleves unos días con el HTTPS funcionando bien en ambos, puedes
+descomentar la línea de Strict-Transport-Security del .htaccess. No la actives
+antes: una vez enviada, los navegadores se niegan a usar http durante un año.
+
+
+SI CAMBIAS ALGÚN FICHERO MÁS ADELANTE
+-------------------------------------
+Los CSS, JS e imágenes se referencian con ?v=20260825 al final de la URL. Si
+modificas assets/css/styles.css, assets/js/main.js o alguna imagen, sube ese
+número en los cuatro HTML (por ejemplo a ?v=20260901). Si no, los visitantes
+que ya han entrado seguirán viendo la versión antigua durante un tiempo.
+
+
+PARA ACABAR: GOOGLE
+-------------------
+  1. Da de alta padelpulselive.com en Google Search Console.
+  2. Envía https://padelpulselive.com/sitemap.xml
+  3. En la ficha de Google Play, pon padelpulselive.com en el campo
+     "Sitio web del desarrollador": es el enlace con más autoridad que puedes
+     conseguir para este proyecto.
+
+
+CONTACTO DE LA WEB
+------------------
+Las páginas legales usan ebldigital92@gmail.com como canal de soporte y
+quejas, y los datos de EBLDigital (NIF 05943392P, Calle Fermín Caballero 30
+3D, 28034 Madrid). Si algo de eso cambia, está en privacidad.html,
+cookies.html y terminos.html.

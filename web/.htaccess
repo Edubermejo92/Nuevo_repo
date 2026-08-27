@@ -1,0 +1,95 @@
+# =============================================================================
+#  padelpulselive.com — configuración de Apache / LiteSpeed
+#  Equivale al netlify.toml del repositorio. Va en la raíz de public_html.
+# =============================================================================
+
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+# ------------------------------------------------------------------ HTTPS ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Forzar HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # Dominio canónico sin www (las etiquetas canonical apuntan a la raíz).
+  # Si prefieres que el dominio bueno sea www, comenta este bloque y
+  # descomenta el siguiente.
+  RewriteCond %{HTTP_HOST} ^www\.padelpulselive\.com$ [NC]
+  RewriteRule ^(.*)$ https://padelpulselive.com/$1 [R=301,L]
+
+  # --- Alternativa: canonical con www -------------------------------------
+  # RewriteCond %{HTTP_HOST} ^padelpulselive\.com$ [NC]
+  # RewriteRule ^(.*)$ https://www.padelpulselive.com/$1 [R=301,L]
+  # (si activas esto, cambia también las etiquetas <link rel="canonical">,
+  #  og:url, el sitemap.xml y el robots.txt para que usen www)
+
+  # ------------------------------------------------------------- URLs SEO ---
+  # URLs limpias y variantes habituales -> 301 a la URL canónica .html
+  RewriteRule ^privacidad/?$              /privacidad.html [R=301,L]
+  RewriteRule ^politica-de-privacidad/?$  /privacidad.html [R=301,L]
+  RewriteRule ^cookies/?$                 /cookies.html    [R=301,L]
+  RewriteRule ^politica-de-cookies/?$     /cookies.html    [R=301,L]
+  RewriteRule ^terminos/?$                /terminos.html   [R=301,L]
+  RewriteRule ^terminos-y-condiciones/?$  /terminos.html   [R=301,L]
+  RewriteRule ^aviso-legal/?$             /terminos.html   [R=301,L]
+  RewriteRule ^descargar/?$               /#descargar      [R=301,L]
+</IfModule>
+
+# --------------------------------------------------------------------- 404 --
+ErrorDocument 404 /404.html
+
+# --------------------------------------------------------------- Cabeceras --
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+  # HSTS: actívalo SOLO cuando el HTTPS funcione en el dominio y en www.
+  # Una vez enviado, el navegador se niega a usar http durante un año.
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # El HTML se revalida siempre
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # Los estáticos NO llevan hash en el nombre: se revalidan, no se congelan.
+  # Las referencias del HTML llevan ?v=AAAAMMDD, que hay que subir al cambiarlas.
+  <FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400"
+  </FilesMatch>
+
+  <FilesMatch "\.(xml|txt)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------ Compresión ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript image/svg+xml
+</IfModule>
+
+# ------------------------------------------------------------ Tipos MIME ----
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# ------------------------------------------------- Protección de ficheros ---
+<FilesMatch "^\.(htaccess|htpasswd|git|env)">
+  Require all denied
+</FilesMatch>

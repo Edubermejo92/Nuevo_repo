@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>App marcador de pádel para móvil y reloj | PadelPulse Live</title>
+<meta name="description" content="PadelPulse Live es la app marcador de pádel con árbitro IA y voz que canta los puntos en el móvil y en el reloj Wear OS. Puntúas en la muñeca, en 12 idiomas. Disponible en Google Play.">
+<meta name="keywords" content="app marcador de padel, marcador de pádel, contador de puntos padel, marcador padel reloj, marcador padel Wear OS, árbitro IA padel, app para contar puntos de padel">
+<meta name="author" content="EBLDigital">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#0e0e0e">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://padelpulselive.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PadelPulse Live">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://padelpulselive.com/">
+<meta property="og:title" content="App marcador de pádel para móvil y reloj | PadelPulse Live">
+<meta property="og:description" content="Marcador de pádel con árbitro IA y voz que canta los puntos en el móvil y en el reloj Wear OS. En 12 idiomas, para jugadores amateur y profesionales.">
+<meta property="og:image" content="https://padelpulselive.com/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PadelPulse Live, app marcador de pádel para móvil y Wear OS">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="App marcador de pádel para móvil y reloj | PadelPulse Live">
+<meta name="twitter:description" content="Marcador de pádel con árbitro IA y voz que canta los puntos en el móvil y en el reloj Wear OS.">
+<meta name="twitter:image" content="https://padelpulselive.com/assets/img/og-image.png">
+
+<link rel="icon" href="/assets/img/icon.png?v=20260827" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/img/icon.png?v=20260827">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20260827">
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://padelpulselive.com/#organization",
+      "name": "EBLDigital",
+      "url": "https://padelpulselive.com/",
+      "logo": "https://padelpulselive.com/assets/img/logo.png",
+      "email": "ebldigital92@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Fermín Caballero 30, 3D",
+        "postalCode": "28034",
+        "addressLocality": "Madrid",
+        "addressCountry": "ES"
+      },
+      "areaServed": "ES"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://padelpulselive.com/#website",
+      "url": "https://padelpulselive.com/",
+      "name": "PadelPulse Live",
+      "description": "App marcador de pádel con árbitro IA y voz para móvil y Wear OS.",
+      "inLanguage": "es-ES",
+      "publisher": { "@id": "https://padelpulselive.com/#organization" }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://padelpulselive.com/#app",
+      "name": "PadelPulse Live",
+      "alternateName": "PadelPulse Live — Marcador de pádel",
+      "description": "App marcador de pádel para contar los puntos de forma sencilla, con árbitro IA y voz que canta el tanteo en el móvil y en el reloj Wear OS. Disponible en 12 idiomas y pensada para jugadores amateur y profesionales.",
+      "applicationCategory": "SportsApplication",
+      "applicationSubCategory": "Marcador de pádel",
+      "operatingSystem": "Android, Wear OS",
+      "url": "https://padelpulselive.com/",
+      "installUrl": "https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app",
+      "inLanguage": ["es", "en", "fr", "de", "it", "pt", "nl", "sv", "fi", "ru", "ja", "ko"],
+      "availableLanguage": ["Español", "English", "Français", "Deutsch", "Italiano", "Português", "Nederlands", "Svenska", "Suomi", "Русский", "日本語", "한국어"],
+      "image": "https://padelpulselive.com/assets/img/og-image.png",
+      "screenshot": "https://padelpulselive.com/assets/img/og-image.png",
+      "featureList": [
+        "Marcador de pádel en un toque",
+        "Árbitro IA que aplica el reglamento",
+        "Voz que canta los puntos",
+        "App para reloj Wear OS: puntúas en la muñeca",
+        "Cuatro modos de control entre móvil y reloj",
+        "Control del brillo y del sonido del reloj",
+        "Punto de oro, ventaja, tie-break y super tie-break",
+        "Historial de partidos",
+        "Disponible en 12 idiomas"
+      ],
+      "publisher": { "@id": "https://padelpulselive.com/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://padelpulselive.com/#faq",
+      "inLanguage": "es-ES",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es PadelPulse Live?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PadelPulse Live es una app marcador de pádel para Android y Wear OS. Lleva el tanteo del partido con un toque, aplica el reglamento con un árbitro IA y canta los puntos en voz alta tanto en el móvil como en el reloj."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En cuántos idiomas está la app marcador de pádel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En 12 idiomas: español, inglés, francés, alemán, italiano, portugués, neerlandés, sueco, finés, ruso, japonés y coreano. Se traducen tanto la interfaz como la voz que canta el tanteo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo puntuar desde el reloj sin sacar el móvil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El marcador se mantiene activo en la muñeca y puntúas directamente en el reloj: un toque suma el punto a favor y otro el punto en contra, con un segundo de margen para confirmarlo antes de que se contabilice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hace el árbitro IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El árbitro IA se encarga de la lógica del partido: suma el punto al equipo correcto, controla el saque, aplica ventaja o punto de oro, gestiona la doble falta, cierra juegos y sets y resuelve el tie-break y el super tie-break. Tú solo marcas quién ha ganado el punto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo controlar el reloj desde la app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Desde la app ajustas el brillo y el sonido del reloj para que el marcador se lea a pleno sol y se escuche en pista sin tener que salir de la aplicación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve tanto para jugadores amateur como para profesionales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. En modo rápido cualquier jugador amateur puede abrir la app y empezar a contar puntos en segundos. Para competición y entrenamiento puedes elegir el formato del partido, el número de sets y consultar el historial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se consigue la app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se descarga desde Google Play. Es una aplicación de pago con un único cobro: el precio actualizado aparece siempre en la ficha de Google Play."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ============================================================== NAV === -->
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a class="brand" href="/" aria-label="PadelPulse Live, inicio">
+      <img class="brand__logo" src="/assets/img/logo.png?v=20260827" width="362" height="180" alt="PadelPulse Live">
+    </a>
+
+    <button class="nav__burger" data-burger type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú de navegación">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav__menu" id="menu-principal" data-menu>
+      <nav aria-label="Navegación principal">
+        <ul class="nav__links">
+          <li><a href="#capacidades">Capacidades</a></li>
+          <li><a href="#dispositivos">Móvil y reloj</a></li>
+          <li><a href="#arbitro-ia">Árbitro IA</a></li>
+          <li><a href="#idiomas">Idiomas</a></li>
+          <li><a href="#faq">Preguntas</a></li>
+        </ul>
+      </nav>
+      <div class="nav__cta nav__cta--desktop">
+        <a class="btn btn--primary btn--sm" href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener">
+          Descargar
+        </a>
+      </div>
+      <div class="nav__cta nav__cta--mobile">
+        <a class="btn btn--primary" href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener">
+          Descargar en Google Play
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- ============================================================= HERO === -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+
+      <div class="hero__copy">
+        <p class="pill">
+          <span class="pill__dot" aria-hidden="true"></span>
+          <span class="pill__txt"><b>Disponible en Google Play</b> · Móvil&nbsp;+&nbsp;Wear&nbsp;OS</span>
+        </p>
+
+        <h1>La <span class="grad-text">app marcador de pádel</span> que canta los puntos por ti</h1>
+
+        <p class="lead">
+          Deja de discutir el tanteo. PadelPulse Live lleva la cuenta de tu partido
+          con un solo toque, aplica el reglamento con un <strong>árbitro&nbsp;IA</strong> y
+          canta cada punto <strong>en voz alta</strong> desde el móvil o desde tu reloj Wear&nbsp;OS.
+        </p>
+
+        <div class="cta-row">
+          <a class="gplay" href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener" aria-label="Consigue PadelPulse Live en Google Play">
+            <svg viewBox="0 0 512 512" aria-hidden="true">
+              <path fill="#00d97e" d="M47 20c-6 6-9 15-9 27v418c0 12 3 21 9 27l2 2 234-234v-8L49 18z"/>
+              <path fill="#ffd400" d="M361 334l-78-78v-8l78-78 2 1 93 53c26 15 26 39 0 54l-93 53z"/>
+              <path fill="#f44336" d="M363 333l-80-80L47 489c9 9 23 10 39 1z"/>
+              <path fill="#2196f3" d="M363 172L86 15C70 6 56 7 47 16l236 237z"/>
+            </svg>
+            <span class="gplay__txt">
+              <span class="gplay__small">Consíguela en</span>
+              <span class="gplay__big">Google Play</span>
+            </span>
+          </a>
+
+          <a class="btn btn--ghost" href="#capacidades">Ver capacidades</a>
+        </div>
+
+        <ul class="hero__proof">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            Disponible en 12 idiomas
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            Puntúas en la muñeca
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            Voz que canta el tanteo
+          </li>
+        </ul>
+      </div>
+
+      <!-- Maqueta móvil + reloj -->
+      <div class="showcase" aria-hidden="true">
+        <div class="phone">
+          <span class="phone__notch"></span>
+          <div class="phone__screen">
+            <div class="scoreboard">
+              <div class="scoreboard__head">
+                <span>Set 2 · Juego 7</span>
+                <span class="scoreboard__live">En juego</span>
+              </div>
+
+              <div class="score-card score-card--serving">
+                <span class="score-card__team">
+                  <span class="score-card__ball"></span>
+                  <span class="score-card__name">Pareja A</span>
+                </span>
+                <span class="score-card__set">6</span>
+                <span class="score-card__set">4</span>
+                <span class="score-card__pts">40</span>
+              </div>
+
+              <div class="score-card">
+                <span class="score-card__team">
+                  <span class="score-card__ball" style="background:#64748b"></span>
+                  <span class="score-card__name">Pareja B</span>
+                </span>
+                <span class="score-card__set">4</span>
+                <span class="score-card__set">3</span>
+                <span class="score-card__pts">30</span>
+              </div>
+
+              <div class="voice-bubble">
+                <span class="voice-bubble__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+                </span>
+                <span class="voice-bubble__txt"><b>«Cuarenta - treinta»</b><br>Árbitro IA · voz activa</span>
+                <span class="eq"><i></i><i></i><i></i><i></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="watch">
+          <div class="watch__face">
+            <span class="watch__label">Punto de oro</span>
+            <span class="watch__score"><b>40</b> · 40</span>
+            <span class="watch__sets">6-4 · 4-3</span>
+            <span class="watch__tap">Toca para sumar</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== STATS ==== -->
+<section class="section section--alt" aria-label="Resumen de la aplicación">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat">
+        <p class="stat__k">1 toque</p>
+        <p class="stat__l">Sumar un punto durante el partido</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">12 idiomas</p>
+        <p class="stat__l">Interfaz y voz traducidas</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">4 modos</p>
+        <p class="stat__l">De control entre móvil y reloj</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">0 dudas</p>
+        <p class="stat__l">El árbitro IA aplica el reglamento</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== CAPACIDADES === -->
+<section class="section" id="capacidades">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Capacidades</p>
+      <h2>Todo lo que necesita un marcador de pádel</h2>
+      <p class="lead">
+        Diseñada para usarse con la pala en la mano: botones grandes, cero menús
+        y una lógica de partido que no se equivoca.
+      </p>
+    </div>
+
+    <div class="grid grid--3">
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <h3>Contar puntos de forma sencilla</h3>
+        <p>Un toque en tu pareja y listo. La app traduce el toque a 15, 30, 40, ventaja o juego sin que tengas que pensar en el tanteo.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1-1 2.6A5 5 0 0 1 17 15v2a5 5 0 0 1-10 0v-2a5 5 0 0 1 2-4.4A4 4 0 0 1 8 8V7a4 4 0 0 1 4-4z"/><path d="M9 8h6"/></svg></span>
+        <h3>Árbitro IA integrado</h3>
+        <p>Controla el saque, la doble falta, la ventaja o el punto de oro, el cierre de juegos y sets, el tie-break y el super tie-break.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></span>
+        <h3>Voz que canta los puntos</h3>
+        <p>El marcador se escucha en alto en el móvil y en el reloj. Toda la pista sabe cómo va el partido sin mirar la pantalla.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6V3h6v3M9 18v3h6v-3"/></svg></span>
+        <h3>Puntúas en la muñeca</h3>
+        <p>El marcador se mantiene activo en el reloj durante todo el partido. Tocas y el punto, a favor o en contra, se contabiliza en un segundo.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+        <h3>Brillo y sonido del reloj</h3>
+        <p>Ajusta desde la app el brillo y el volumen del reloj: legible a pleno sol y audible en pista, sin salir del marcador.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
+        <h3>Historial de partidos</h3>
+        <p>Cada encuentro queda guardado. Recupera el marcador de partidos anteriores y retoma una partida sin perder el tanteo.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 8v4l3 2"/></svg></span>
+        <h3>Formato de partido a tu medida</h3>
+        <p>Al mejor de los sets que elijas, con punto de oro o ventaja y con super tie-break: adapta el formato a tu liga, torneo o partido de club.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+        <h3>12 idiomas</h3>
+        <p>Interfaz y voz traducidas a doce idiomas, del español al japonés. Cada jugador puede usar la app en el suyo.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== DISPOSITIVOS == -->
+<section class="section section--alt" id="dispositivos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Móvil y reloj</p>
+      <h2>Marcador de pádel en el móvil y en el reloj</h2>
+      <p class="lead">
+        Usa el dispositivo que tengas más a mano. Los dos llevan el mismo partido
+        y los dos cantan los puntos.
+      </p>
+    </div>
+
+    <div class="split">
+
+      <article class="device reveal">
+        <span class="device__tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+          Android
+        </span>
+        <h3>En el móvil, la pantalla grande del partido</h3>
+        <p>Apóyalo en la valla o en el banquillo y conviértelo en el marcador de la pista. Números enormes, legibles a distancia y a pleno sol.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Marcador a pantalla completa para toda la pista</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Voz alta y clara entre punto y punto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Deshacer el último punto si hay error</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Control del brillo y el sonido del reloj</li>
+        </ul>
+      </article>
+
+      <article class="device device--court reveal">
+        <span class="device__tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6V3h6v3M9 18v3h6v-3"/></svg>
+          Wear OS
+        </span>
+        <h3>En el reloj, el marcador siempre activo</h3>
+        <p>Entras a la pista solo con el reloj: el marcador se mantiene en pantalla durante todo el partido y puntúas sin parar el juego.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Un toque suma el punto a favor, otro el punto en contra</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Un segundo de margen antes de contabilizarlo, por si te equivocas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> El reloj también canta el tanteo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Vinculación por Bluetooth, con código o sin él</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- Modos de control -->
+    <div class="section-head reveal" style="margin-top:clamp(56px,7vw,84px);margin-bottom:28px">
+      <p class="eyebrow">Cuatro modos</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">Tú decides quién manda</h2>
+      <p class="lead">
+        Según con quién juegues y qué lleves encima, eliges cómo se reparten el
+        trabajo el móvil y el reloj.
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+      <article class="card reveal">
+        <h3>Manda el móvil</h3>
+        <p>Puntúas desde el teléfono y el reloj refleja el marcador en la muñeca.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Manda el reloj</h3>
+        <p>Puntúas en la muñeca y el móvil hace de marcador grande para la pista.</p>
+      </article>
+      <article class="card reveal">
+        <h3>El reloj va por su cuenta</h3>
+        <p>Sin móvil en la pista: el reloj lleva el partido completo de forma autónoma.</p>
+      </article>
+      <article class="card reveal">
+        <h3>El reloj solo muestra</h3>
+        <p>Modo lectura: el reloj enseña el tanteo sin que un toque accidental lo cambie.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= ÁRBITRO IA = -->
+<section class="section" id="arbitro-ia">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Árbitro IA + voz</p>
+      <h2>Un árbitro en la pista, sin árbitro en la pista</h2>
+      <p class="lead">
+        La parte difícil de contar puntos en pádel no es sumar: es acordarse de
+        quién saca, cuándo hay doble falta y cómo se cierra el set. De eso se
+        encarga la app.
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+      <article class="card reveal">
+        <h3>Aplica el reglamento</h3>
+        <p>Ventaja o punto de oro, tie-break y super tie-break según el formato que elijas al empezar.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Controla el saque</h3>
+        <p>Sabe a quién le toca sacar y canta la doble falta. Se acabó el «¿quién sacaba?».</p>
+      </article>
+      <article class="card reveal">
+        <h3>Cierra juegos y sets</h3>
+        <p>Al mejor de los sets que hayas configurado, y avisa cuando alguien gana el partido.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Canta el resultado</h3>
+        <p>Voz clara que anuncia el punto, el juego, el set y el final del partido, en tu idioma.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== IDIOMAS == -->
+<section class="section section--alt" id="idiomas">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">12 idiomas</p>
+      <h2>Juegues donde juegues, en tu idioma</h2>
+      <p class="lead">
+        La interfaz y la voz que canta el tanteo están traducidas a doce idiomas.
+        Cada jugador elige el suyo desde los ajustes de la app.
+      </p>
+    </div>
+
+    <ul class="langs reveal" aria-label="Idiomas disponibles">
+      <li><span lang="es">Español</span></li>
+      <li><span lang="en">English</span></li>
+      <li><span lang="fr">Français</span></li>
+      <li><span lang="de">Deutsch</span></li>
+      <li><span lang="it">Italiano</span></li>
+      <li><span lang="pt">Português</span></li>
+      <li><span lang="nl">Nederlands</span></li>
+      <li><span lang="sv">Svenska</span></li>
+      <li><span lang="fi">Suomi</span></li>
+      <li><span lang="ru">Русский</span></li>
+      <li><span lang="ja">日本語</span></li>
+      <li><span lang="ko">한국어</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================= JUGADORES == -->
+<section class="section" id="jugadores">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Para quién es</p>
+      <h2>De la pista del club al torneo profesional</h2>
+      <p class="lead">
+        La misma app, dos formas de usarla: rápida y sin configuración para el
+        partido de los martes, o completa para competir en serio.
+      </p>
+    </div>
+
+    <div class="grid grid--2">
+
+      <article class="audience reveal">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          Jugadores amateur
+        </h3>
+        <ul>
+          <li>Nueva partida y a jugar: el modo rápido no necesita configuración.</li>
+          <li>Nadie discute el tanteo, porque el marcador se escucha en alto.</li>
+          <li>Ideal para el partido de club, la liga de amigos o la clase con el monitor.</li>
+          <li>Si te equivocas al sumar, deshaces el punto y sigues.</li>
+        </ul>
+      </article>
+
+      <article class="audience reveal">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4"/><path d="M17 3H7v6a5 5 0 0 0 10 0V3z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+          Jugadores y equipos profesionales
+        </h3>
+        <ul>
+          <li>Formato de partido configurable para adaptarse al reglamento de cada torneo.</li>
+          <li>Historial de partidos para revisar encuentros anteriores.</li>
+          <li>El entrenador sigue el partido desde el reloj mientras dirige desde fuera.</li>
+          <li>Marcador fiable en entrenamientos y sparrings, sin necesidad de personal de mesa.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PASOS === -->
+<section class="section section--alt" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Cómo funciona</p>
+      <h2>Del primer saque al último punto en cuatro pasos</h2>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal">
+        <span class="step__num">01</span>
+        <h3>Descarga la app</h3>
+        <p>Instálala desde Google Play en tu móvil Android. Si tienes reloj Wear OS, se instala también en la muñeca.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step__num">02</span>
+        <h3>Elige idioma y modo</h3>
+        <p>Tu idioma entre los doce disponibles, el formato del partido y quién manda: el móvil o el reloj.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step__num">03</span>
+        <h3>Juega y toca</h3>
+        <p>Cada vez que se gana un punto, un toque en el móvil o en el reloj. La voz canta el tanteo al instante.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step__num">04</span>
+        <h3>Revisa el partido</h3>
+        <p>Al terminar, el encuentro queda guardado en el historial y puedes recuperarlo cuando quieras.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== FAQ === -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2>Dudas sobre la app marcador de pádel</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>¿Qué es PadelPulse Live?</summary>
+        <div class="faq__body">
+          <p>PadelPulse Live es una <strong>app marcador de pádel</strong> para Android y Wear OS. Lleva el tanteo del partido con un toque, aplica el reglamento con un árbitro IA y canta los puntos en voz alta tanto en el móvil como en el reloj.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿En cuántos idiomas está la app?</summary>
+        <div class="faq__body">
+          <p>En <strong>12 idiomas</strong>: español, inglés, francés, alemán, italiano, portugués, neerlandés, sueco, finés, ruso, japonés y coreano. Se traducen tanto la interfaz como la voz que canta el tanteo.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Puedo puntuar desde el reloj sin sacar el móvil?</summary>
+        <div class="faq__body">
+          <p>Sí. El marcador se mantiene activo en la muñeca durante todo el partido y puntúas directamente en el reloj: un toque suma el punto a favor y otro el punto en contra, con <strong>un segundo de margen</strong> antes de que se contabilice, por si te equivocas.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Qué hace exactamente el árbitro IA?</summary>
+        <div class="faq__body">
+          <p>Se encarga de toda la lógica del partido: suma el punto a la pareja correcta, controla el saque, canta la doble falta, aplica ventaja o punto de oro, cierra juegos y sets y resuelve el tie-break y el super tie-break. Tú solo marcas quién ha ganado el punto.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Puedo controlar el reloj desde la app?</summary>
+        <div class="faq__body">
+          <p>Sí. Desde la app ajustas el <strong>brillo y el sonido del reloj</strong> para que el marcador se lea a pleno sol y se escuche en pista, sin salir de la aplicación.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Cómo se conectan el móvil y el reloj?</summary>
+        <div class="faq__body">
+          <p>Por Bluetooth. Puedes vincularlos con un código de emparejamiento o directamente sin código. Una vez vinculados, eliges cuál de los cuatro modos de control quieres usar en cada partido.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Sirve tanto para jugadores amateur como para profesionales?</summary>
+        <div class="faq__body">
+          <p>Sí. En modo rápido cualquier jugador amateur puede abrir la app y empezar a contar puntos en segundos. Para competición y entrenamiento puedes elegir el formato del partido, el número de sets y consultar el historial.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Cómo se consigue la app?</summary>
+        <div class="faq__body">
+          <p>Se descarga desde <a href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener">Google Play</a>. Es una aplicación de pago con un único cobro, sin suscripción: el precio actualizado aparece siempre en la ficha de Google Play.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Qué datos recoge la app?</summary>
+        <div class="faq__body">
+          <p>Los mínimos para que el marcador funcione. Puedes consultar el detalle en la <a href="/privacidad.html">política de privacidad</a> y en la <a href="/cookies.html">política de cookies</a>.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= CTA FINAL == -->
+<section class="section section--alt" id="descargar">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2>Tu próximo partido, con el tanteo resuelto</h2>
+      <p class="lead">
+        Consigue PadelPulse Live y deja que el árbitro IA cante los puntos
+        mientras tú solo te preocupas de jugar.
+      </p>
+      <div class="cta-row">
+        <a class="gplay" href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener" aria-label="Consigue PadelPulse Live en Google Play">
+          <svg viewBox="0 0 512 512" aria-hidden="true">
+            <path fill="#00d97e" d="M47 20c-6 6-9 15-9 27v418c0 12 3 21 9 27l2 2 234-234v-8L49 18z"/>
+            <path fill="#ffd400" d="M361 334l-78-78v-8l78-78 2 1 93 53c26 15 26 39 0 54l-93 53z"/>
+            <path fill="#f44336" d="M363 333l-80-80L47 489c9 9 23 10 39 1z"/>
+            <path fill="#2196f3" d="M363 172L86 15C70 6 56 7 47 16l236 237z"/>
+          </svg>
+          <span class="gplay__txt">
+            <span class="gplay__small">Consíguela en</span>
+            <span class="gplay__big">Google Play</span>
+          </span>
+        </a>
+      </div>
+      <p class="cta-note" style="justify-content:center;margin-top:20px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Android y Wear OS · 12 idiomas · Pago único, sin suscripción
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================== FOOTER === -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+
+      <div class="footer__about">
+        <a class="brand" href="/">
+          <img class="brand__logo" src="/assets/img/logo.png?v=20260827" width="362" height="180" alt="PadelPulse Live">
+        </a>
+        <p>App marcador de pádel con árbitro IA y voz para móvil Android y reloj Wear OS. Disponible en 12 idiomas.</p>
+      </div>
+
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="#capacidades">Capacidades</a></li>
+          <li><a href="#dispositivos">Móvil y Wear OS</a></li>
+          <li><a href="#arbitro-ia">Árbitro IA y voz</a></li>
+          <li><a href="#idiomas">Idiomas</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Descargar</h4>
+        <ul>
+          <li><a href="https://play.google.com/store/apps/details?id=padelpulseapp2.netlify.app" target="_blank" rel="noopener">Google Play</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="mailto:ebldigital92@gmail.com">Soporte y quejas</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacidad.html">Política de privacidad</a></li>
+          <li><a href="/cookies.html">Política de cookies</a></li>
+          <li><a href="/terminos.html">Términos y condiciones</a></li>
+          <li><a href="#" data-consent-action="open">Preferencias de cookies</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p style="margin:0">© <span data-year>2026</span> EBLDigital. Todos los derechos reservados.</p>
+      <div class="footer__legal">
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/cookies.html">Cookies</a>
+        <a href="/terminos.html">Términos</a>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">
+      Google Play y el logotipo de Google Play son marcas comerciales de Google LLC.
+      Wear OS by Google es una marca comercial de Google LLC. PadelPulse Live no está
+      afiliada ni patrocinada por Google LLC.
+    </p>
+  </div>
+</footer>
+
+<!-- ==================================================== BANNER COOKIES == -->
+<div class="cookie-banner" data-cookie-banner role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <div class="cookie-banner__txt">
+    <strong>Usamos cookies</strong>
+    Este sitio usa cookies técnicas necesarias para funcionar. Solo si lo aceptas
+    usaremos además cookies de análisis para entender cómo se usa la web.
+    Más información en la <a href="/cookies.html">política de cookies</a>.
+  </div>
+  <div class="cookie-banner__actions">
+    <button class="btn btn--ghost btn--sm" type="button" data-consent-action="rejected">Rechazar</button>
+    <button class="btn btn--primary btn--sm" type="button" data-consent-action="accepted">Aceptar</button>
+  </div>
+</div>
+
+<script src="/assets/js/main.js?v=20260827" defer></script>
+</body>
+</html>

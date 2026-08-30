@@ -1,7 +1,7 @@
 /* Cat Health Tracker — service worker mínimo.
    Cachea el shell de la app para que funcione sin conexión.
    Sube CACHE_VERSION cada vez que publiques una versión nueva. */
-const CACHE_VERSION = 'cht-v1';
+const CACHE_VERSION = 'cht-v2';
 const ASSETS = ['index.html', 'manifest.json'];
 
 self.addEventListener('install', e => {
@@ -44,5 +44,31 @@ self.addEventListener('fetch', e => {
         return res;
       })
       .catch(() => caches.match(req).then(r => r || caches.match('index.html')))
+  );
+});
+
+/* Notificaciones push en segundo plano.
+   Las manda supabase/functions/send-reminder-pushes cada vez que a un
+   recordatorio le toca sonar. Llegan aquí incluso con la app cerrada:
+   es justo lo que un setInterval dentro de la pestaña no puede lograr. */
+self.addEventListener('push', e => {
+  let data = {};
+  try { data = e.data ? e.data.json() : {}; } catch (err) { data = {}; }
+  const title = data.title || 'Cat Health Tracker';
+  e.waitUntil(self.registration.showNotification(title, {
+    body: data.body || '',
+    tag: data.tag,     // mismo tag = mismo aviso: si llega dos veces, se reemplaza en vez de apilarse
+    renotify: false,
+    data: { tag: data.tag || '' }
+  }));
+});
+
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+      for (const c of list) if ('focus' in c) return c.focus();
+      if (self.clients.openWindow) return self.clients.openWindow('./');
+    })
   );
 });

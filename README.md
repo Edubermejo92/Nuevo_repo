@@ -12,7 +12,7 @@ para no perderlos al cambiar de móvil.
 
 | Pestaña | Qué incluye |
 |---|---|
-| **Inicio** | Recordatorios del día con interruptor y alarma · selector de mes con consejos estacionales (primavera, verano, otoño e invierno, 8 consejos por estación) |
+| **Inicio** | Recordatorios del día con interruptor y alarma — **con cuenta, llegan como notificación push aunque la app esté cerrada** · selector de mes con consejos estacionales (primavera, verano, otoño e invierno, 8 consejos por estación) |
 | **Razas** | 54 razas agrupadas por región de origen, con peso ideal por sexo, longitud, esperanza de vida, escalas de cepillado/actividad/sociabilidad/vocalidad y fichas de pelaje, alimentación, salud, convivencia y curiosidades |
 | **Comida** | 151 alimentos en 6 categorías (pienso, húmedo, carne y pescado, vegetal, lácteos y huevo, snacks y suplementos) con 4 niveles de idoneidad: apto / ocasional / no dar / **tóxico** · buscador, filtros y calculadora de ración diaria |
 | **Salud** | Perfil del gato con foto · peso, longitud, edad y edad humana · condición corporal frente al rango de su raza · **evaluación automática de si necesita veterinario** · consejos según sus problemas crónicos · gráfico de peso · últimos registros |
@@ -50,10 +50,11 @@ Editar un gato reutiliza el mismo asistente, precargado y con «Guardar y salir�
 - **Dictado por voz**: botón 🎤 en las notas que transcribe automáticamente lo que dices
   (Web Speech API; requiere permiso de micrófono).
 - **Registro de malestar**: 22 síntomas frecuentes en chips + nivel de gravedad.
-- **Calendario con alarmas dentro de la app**: comprobación cada 20 segundos, aviso a
-  pantalla completa con sonido, opción de posponer 10 minutos y notificación del sistema
-  si el usuario da permiso. Frecuencias: diaria, varias veces al día, días concretos de
-  la semana, cada N días, mensual, anual y una sola vez.
+- **Calendario con alarmas**: comprobación cada 20 segundos con la app abierta (aviso a
+  pantalla completa, sonido y posponer 10 minutos), y **notificación push real con la app
+  cerrada** si el usuario tiene cuenta y da permiso — ver [«Notificaciones push»](#notificaciones-push-en-segundo-plano).
+  Frecuencias: diaria, varias veces al día, días concretos de la semana, cada N días,
+  mensual, anual y una sola vez.
 - **Avisos automáticos deducidos del historial**: próxima vacuna (+365 d), próximo
   antiparasitario (+30 d) y próxima revisión (+365 d, o +182 d a partir de los 8 años).
 - **Evaluación de salud**: cruza peso con el rango de la raza y el sexo, tendencia del
@@ -153,10 +154,90 @@ supabase/migrations/
   20260830120529_cat_photos_storage.sql           bucket privado de fotos y sus políticas
   20260830120547_lock_down_handle_new_user.sql    cierra las funciones SECURITY DEFINER
   20260830123000_cats_chronic_conditions.sql      problemas crónicos del gato
+  20260830233000_push_notifications_schema.sql    tablas de notificaciones push (ver más abajo)
+  20260830233100_push_secrets_access.sql          acceso a Supabase Vault desde la Edge Function
+  20260830233200_push_cron_schedule.sql           cron que dispara los envíos cada 5 minutos
 ```
 
 Para levantarlo en otro proyecto: `supabase db push`, o pegar los archivos en orden en el
 editor SQL. Después, cambia `CLOUD.url` y `CLOUD.key` al principio del `<script>`.
+
+## Notificaciones push en segundo plano
+
+El motor de alarmas original (`checkAlarms`, un `setInterval` en el propio JS) solo suena
+con la pestaña abierta: es lo máximo que puede hacer JavaScript corriendo dentro de una
+página. Para que un aviso llegue con **el móvil bloqueado o la app cerrada**, hace falta algo
+fuera del navegador que sepa la hora de cada recordatorio y se lo mande al dispositivo — eso
+es lo que monta este bloque, y es **el motivo por el que las notificaciones en segundo plano
+requieren una cuenta**: sin usuario identificado no hay dónde guardar en qué dispositivo
+avisar. Sin cuenta, la app sigue avisando igual mientras la pestaña permanece abierta.
+
+**Cómo funciona, de punta a punta:**
+
+1. Al activar las notificaciones (`enableNotifications()`), el navegador se suscribe a Web
+   Push (`PushManager.subscribe`) con la clave pública VAPID como `applicationServerKey`. Si
+   hay sesión iniciada, esa suscripción (endpoint + claves de cifrado + zona horaria del
+   dispositivo) se guarda en `push_subscriptions`.
+2. `pg_cron` invoca cada 5 minutos, dentro de la propia base de datos, la función
+   `send-reminder-pushes` (vía `pg_net`, HTTP asíncrono — nunca sale del proyecto de Supabase).
+3. La función mira, **en la zona horaria de cada suscripción** (no la del servidor), qué
+   recordatorios activos tocan ahora mismo — mismo cálculo de frecuencia (`remOccursOn` /
+   `remTimes`) que usa el cliente, reimplementado en Deno con comentarios en paralelo para
+   que sea fácil mantener las dos versiones sincronizadas si cambia la lógica.
+4. Para cada aviso que toca, inserta una fila en `push_log` (clave: recordatorio + fecha +
+   hora); si ya existía, no reenvía — así una ventana de tolerancia de 15 minutos (para
+   cubrir hasta 2 pasadas de cron perdidas) no duplica avisos.
+5. Envía el Web Push firmado con la clave VAPID privada. Si el navegador dio de baja el
+   endpoint (410/404 — desinstaló, borró datos del sitio), la suscripción se borra sola.
+6. El `service worker` (`sw.js`) recibe el push incluso con la app cerrada y muestra la
+   notificación del sistema; al tocarla, enfoca la app si ya está abierta en una pestaña o
+   abre una nueva.
+
+**Secretos: nunca en un archivo.** Las claves VAPID y el secreto que autentica al cron
+viven cifrados en **Supabase Vault** (ya instalado en el proyecto), leídos en el momento de
+ejecutarse por `public.get_secret()`, una función con el `EXECUTE` revocado a `anon` y
+`authenticated` — solo `service_role` (la Edge Function) puede llamarla. Verificado con
+`has_function_privilege()` contra la base real, no simulado.
+
+**Autenticación de la Edge Function.** Se despliega con `verify_jwt=false` — no por
+descuido, sino porque implementa su propia autenticación: exige la cabecera
+`x-cron-secret` con el valor guardado en Vault, y devuelve 401 si no coincide (probado
+contra la función real, no solo en el código). Es exactamente el caso que la documentación
+de Supabase contempla para desactivar la verificación de JWT por defecto.
+
+**Reproducirlo en un proyecto nuevo** (el actual ya está desplegado y no necesita nada de esto):
+
+```bash
+# 1. Genera un par de claves VAPID (no necesita red, es criptografía local)
+npx web-push generate-vapid-keys
+
+# 2. Guárdalas en Vault desde el editor SQL de Supabase (nunca en un archivo del repo)
+select vault.create_secret('<clave-publica>',  'vapid_public_key',  'Clave VAPID publica');
+select vault.create_secret('<clave-privada>',  'vapid_private_key', 'Clave VAPID privada');
+select vault.create_secret('<secreto-aleatorio>', 'cron_secret',    'Secreto para pg_cron');
+
+# 3. Aplica las migraciones de supabase/migrations/ (incluidas las tres de push)
+
+# 4. Despliega la función
+supabase functions deploy send-reminder-pushes --no-verify-jwt
+
+# 5. Ajusta la URL dentro de trigger_send_reminder_pushes() en la migración
+#    push_cron_schedule.sql a la de tu propio proyecto antes de aplicarla
+
+# 6. Pon tu propia clave pública en VAPID_PUBLIC_KEY, en index.html
+```
+
+**Limitaciones que conviene conocer:**
+
+- Un aviso puede llegar hasta ~15 minutos después de su hora exacta (la ventana de
+  tolerancia del paso 4), nunca antes. Para una alarma de "dar de comer a las 8:00", es un
+  margen razonable; no lo es para algo que necesite precisión al minuto.
+- Requiere que el usuario tenga cuenta y haya concedido el permiso de notificaciones. La
+  interfaz distingue explícitamente ambos casos (banner de Inicio y bloque de Ajustes).
+- En iOS, Web Push solo funciona si la app se ha **añadido a la pantalla de inicio** (modo
+  PWA instalada); Safari en una pestaña normal no lo soporta, limitación del propio sistema.
+- Si el usuario tiene varios dispositivos con sesión iniciada, cada uno se suscribe por
+  separado y todos reciben el aviso — es el comportamiento esperado, no un fallo.
 
 ## Publicación web (Netlify)
 
@@ -233,6 +314,7 @@ tools/                Script de descarga de las fotos de las razas
 img/breeds/           Fotos de las razas (opcional, lo genera el script)
 netlify.toml          Configuración de despliegue
 supabase/migrations/  Esquema de la base de datos
+supabase/functions/   Edge Function que envía las notificaciones push
 ```
 
 ## Uso

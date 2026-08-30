@@ -44,18 +44,20 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
 /* ── LAYOUT ── */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:100;height:calc(var(--hdr) + env(safe-area-inset-top,0));
   padding-top:env(safe-area-inset-top,0);
-  background:var(--g-main);display:flex;align-items:center;padding-left:14px;padding-right:14px;gap:10px;
+  background:var(--g-main);display:flex;align-items:center;padding-left:12px;padding-right:12px;gap:7px;
   box-shadow:0 2px 16px rgba(143,69,34,.25);}
 .hdr-logo{width:32px;height:32px;border-radius:9px;overflow:hidden;background:rgba(255,255,255,.2);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px;}
-.hdr-title{font-size:17px;font-weight:600;color:#fff;flex:1;letter-spacing:-.02em;font-family:'Fraunces',serif;}
+.hdr-title{font-size:16px;font-weight:600;color:#fff;flex:1;min-width:0;letter-spacing:-.02em;font-family:'Fraunces',serif;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+@media(max-width:359px){ .hdr-title{font-size:14px;} .hdr-lang #hdr-lang-code{display:none;} }
 .hdr-btn{background:rgba(255,255,255,.2);border:none;color:#fff;
   width:32px;height:32px;border-radius:50%;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:.2s;}
 .hdr-btn:active{background:rgba(255,255,255,.35);transform:scale(.93);}
 .hdr-lang{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.18);border:none;
-  color:#fff;height:32px;padding:0 9px;border-radius:8px;cursor:pointer;font-family:inherit;
-  font-size:12px;font-weight:600;flex-shrink:0;transition:.2s;}
+  color:#fff;height:32px;padding:0 7px;border-radius:8px;cursor:pointer;font-family:inherit;
+  font-size:11.5px;font-weight:600;flex-shrink:0;transition:.2s;}
 .hdr-lang:active{background:rgba(255,255,255,.35);transform:scale(.96);}
 .hdr-lang svg{stroke:#fff;fill:none;stroke-width:2.4;opacity:.8;}
 .hdr-lang #hdr-lang-flag{font-size:15px;line-height:1;}
@@ -502,6 +504,70 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
 .sym-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
 .sym-chip{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:5px 11px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:.15s;}
 .sym-chip.active{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
+
+
+/* ── ALTA GUIADA DEL GATO ── */
+.wz-progress{display:flex;gap:4px;margin-bottom:16px;}
+.wz-seg{flex:1;height:4px;border-radius:3px;background:var(--border);transition:background .3s;}
+.wz-seg.done{background:var(--g2);}
+.wz-step{display:none;animation:fadeIn .22s ease;}
+.wz-step.active{display:block;}
+.wz-count{font-size:10.5px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.wz-q{font-size:19px;font-weight:600;font-family:'Fraunces',serif;letter-spacing:-.01em;margin-bottom:5px;}
+.wz-help{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:16px;}
+.wz-nav{display:flex;gap:8px;margin-top:18px;}
+.wz-nav .btn{flex:1;}
+.wz-skip{background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;padding:10px;width:100%;text-decoration:underline;}
+.wz-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.wz-opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px 6px;border-radius:14px;border:2px solid var(--border);background:#fff;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:.18s;}
+.wz-opt .wz-emo{font-size:26px;}
+.wz-opt.active{border-color:var(--g1);background:var(--tint);color:var(--g1);}
+.wz-two{grid-template-columns:repeat(2,1fr);}
+.wz-emoji-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.wz-emoji{width:40px;height:40px;border-radius:11px;border:1.5px solid var(--border);background:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.wz-emoji.active{border-color:var(--g1);background:var(--tint);}
+.cond-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.cond-chip{display:flex;align-items:center;gap:5px;background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:8px 13px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:.15s;text-align:left;}
+.cond-chip.active{background:#fef2f2;border-color:#fca5a5;color:#991b1b;}
+.cond-add{display:flex;gap:6px;margin-top:10px;}
+.cond-add input{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r2);font-family:inherit;font-size:13px;outline:none;}
+.cond-add button{flex-shrink:0;padding:0 15px;border-radius:var(--r2);border:none;background:var(--g1);color:#fff;font-weight:700;font-family:inherit;cursor:pointer;}
+.wz-done{text-align:center;padding:6px 0 4px;}
+.wz-conf{font-size:56px;animation:pop .6s ease;}
+@keyframes pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.wz-done-title{font-size:23px;font-weight:700;font-family:'Fraunces',serif;color:var(--g1);letter-spacing:-.01em;margin-top:8px;}
+.wz-done-name{font-size:17px;font-weight:600;margin-top:6px;}
+.wz-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:14px auto 0;display:flex;align-items:center;justify-content:center;font-size:46px;background:var(--tint);border:3px solid var(--g4);}
+.wz-summary{text-align:left;background:var(--tint);border-radius:12px;padding:12px 14px;margin-top:16px;}
+.wz-sum-row{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:5px 0;border-top:1px solid var(--border2);}
+.wz-sum-row:first-child{border-top:none;}
+.wz-sum-row span:first-child{color:var(--muted);}
+.wz-sum-row span:last-child{font-weight:700;text-align:right;}
+.cond-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+/* ── CUENTA Y SINCRONIZACIÓN ── */
+.auth-hero{text-align:center;padding:4px 0 16px;}
+.auth-logo{font-size:46px;}
+.auth-title{font-size:19px;font-weight:600;font-family:'Fraunces',serif;margin-top:6px;}
+.auth-sub{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;}
+.auth-tab{padding:10px;border-radius:10px;border:1.5px solid var(--border);background:#faf8f6;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:.18s;}
+.auth-tab.active{background:var(--g1);color:#fff;border-color:var(--g1);}
+.auth-msg{border-radius:10px;padding:11px 13px;font-size:12px;line-height:1.5;margin-bottom:12px;display:none;}
+.auth-msg.err{display:block;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;}
+.auth-msg.ok{display:block;background:#f0fdf4;color:#065f46;border:1px solid #bbf7d0;}
+.auth-msg.info{display:block;background:var(--tint);color:var(--g1);border:1px solid var(--border2);}
+.auth-link{background:none;border:none;color:var(--g1);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:underline;padding:8px;width:100%;}
+.acct-box{border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--tint);}
+.acct-row{display:flex;align-items:center;gap:10px;}
+.acct-avatar{width:38px;height:38px;border-radius:50%;background:var(--g-main);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.acct-info{flex:1;min-width:0;}
+.acct-mail{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.acct-state{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:5px;vertical-align:middle;}
+.sync-dot.off{background:#94a3b8;}
+.sync-dot.busy{background:#f59e0b;animation:pulseRec 1s infinite;}
+.hdr-cloud{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:.2s;position:relative;}
+.hdr-cloud:active{transform:scale(.93);}
 .cat-limit{font-size:11px;color:var(--muted);text-align:center;padding:8px 14px 0;}
 </style>
 </head>
@@ -519,7 +585,8 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
   <div class="hdr-logo">🐈</div>
   <div class="hdr-title">Cat Health Tracker</div>
   <button class="hdr-lang" id="hdr-lang-btn" onclick="toggleLangMenu(event)"><span id="hdr-lang-flag">🇪🇸</span><span id="hdr-lang-code">ES</span><svg viewBox="0 0 24 24" width="12" height="12"><polyline points="6 9 12 15 18 9"/></svg></button>
-  <button class="hdr-btn" onclick="openModal('modal-add-cat')" aria-label="Añadir gato">➕</button>
+  <button class="hdr-cloud" id="hdr-cloud" onclick="openAccount()" aria-label="Cuenta y sincronización">☁️</button>
+  <button class="hdr-btn" onclick="newCat()" aria-label="Añadir gato">➕</button>
   <button class="hdr-btn" onclick="openModal('modal-settings')" aria-label="Ajustes">⚙️</button>
 </header>
 <div id="lang-menu" class="lang-menu">
@@ -659,6 +726,7 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
     <div class="qw-arrow">›</div>
   </div>
   <div id="body-condition"></div>
+  <div id="cond-tips"></div>
   <div id="vet-check"></div>
   <div class="chart-wrap">
     <div class="chart-title">📈 <span data-i18n="h.weightevol_kg">Evolución de peso (kg)</span></div>
@@ -863,49 +931,130 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
   </div>
 </div>
 
-<!-- Añadir gato -->
+<!-- Alta guiada del gato -->
 <div class="modal-overlay" id="modal-add-cat" onclick="closeModal(event,'modal-add-cat')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModalById('modal-add-cat')" aria-label="Cerrar">✕</button><div class="modal-handle"></div>
-    <div class="modal-title">🐈 <span id="ac-modal-title" data-i18n="cat.new">Nuevo gato</span></div>
     <input type="hidden" id="ac-id" value=""/>
-    <div class="form-group"><label data-i18n="form.name">Nombre</label><input type="text" id="ac-name" placeholder="Ej: Nala" data-i18n-ph="ph.ex_name"/></div>
-    <div class="form-row">
+    <div class="wz-progress" id="wz-progress"></div>
+
+    <!-- 1. Nombre -->
+    <div class="wz-step active" data-step="1">
+      <div class="wz-count" id="wz-c1"></div>
+      <div class="wz-q" data-i18n="wz.q_name">¿Cómo se llama tu gato?</div>
+      <div class="wz-help" data-i18n="wz.h_name">Es lo único imprescindible. Todo lo demás puedes rellenarlo ahora o más tarde.</div>
       <div class="form-group">
-        <label data-i18n="form.breed">Raza</label>
-        <select id="ac-breed"></select>
+        <input type="text" id="ac-name" maxlength="60" placeholder="Ej: Nala" data-i18n-ph="ph.ex_name" oninput="wzValidate()"/>
       </div>
       <div class="form-group">
-        <label data-i18n="form.sex">Sexo</label>
-        <select id="ac-sex">
-          <option value="M" data-i18n="sex.male">♂ Macho</option>
-          <option value="H" data-i18n="sex.female">♀ Hembra</option>
-          <option value="?" data-i18n="sex.unknown">? Desconocido</option>
-        </select>
+        <label data-i18n="wz.pick_emoji">Elige un icono para identificarlo</label>
+        <div class="wz-emoji-row" id="wz-emoji-row"></div>
+        <input type="hidden" id="ac-emoji" value="🐈"/>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label>🎂 <span data-i18n="form.birthday">Cumpleaños</span></label><input type="date" id="ac-birth"/></div>
-      <div class="form-group"><label data-i18n="form.weight_kg">Peso (kg)</label><input type="number" id="ac-weight" step="0.01" min="0" placeholder="4.5"/></div>
-    </div>
-    <div class="form-group">
-      <label data-i18n="form.neutered">¿Esterilizado?</label>
-      <select id="ac-neutered">
-        <option value="1" data-i18n="yes">Sí</option>
-        <option value="0" data-i18n="no">No</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label data-i18n="form.cat_photo">Foto de tu gato</label>
-      <div class="photo-upload" id="ac-photo-wrap" onclick="document.getElementById('ac-photo-input').click()">
+
+    <!-- 2. Foto -->
+    <div class="wz-step" data-step="2">
+      <div class="wz-count" id="wz-c2"></div>
+      <div class="wz-q" data-i18n="wz.q_photo">Ponle cara</div>
+      <div class="wz-help" data-i18n="wz.h_photo">Elige su mejor foto. Se recorta en cuadrado y se guarda en tu móvil (y en tu cuenta, si tienes una).</div>
+      <div class="photo-upload" onclick="document.getElementById('ac-photo-input').click()">
         <div class="photo-preview" id="ac-photo-preview">
           <span class="photo-placeholder">📷<br><small data-i18n="photo.add">Toca para añadir foto</small></span>
         </div>
         <input type="file" id="ac-photo-input" accept="image/*" capture="environment" style="display:none" onchange="handleCatPhoto(event)"/>
       </div>
     </div>
-    <div class="form-group"><label data-i18n="form.pick_emoji">O elige un emoji</label><input type="text" id="ac-emoji" placeholder="🐈" maxlength="4"/></div>
-    <button class="btn btn-primary btn-w" onclick="saveCat()"><span id="ac-save-label" data-i18n="btn.add_cat">Añadir gato</span></button>
+
+    <!-- 3. Raza -->
+    <div class="wz-step" data-step="3">
+      <div class="wz-count" id="wz-c3"></div>
+      <div class="wz-q" data-i18n="wz.q_breed">¿De qué raza es?</div>
+      <div class="wz-help" data-i18n="wz.h_breed">Con la raza calculamos su peso ideal y te avisamos de las enfermedades a las que está predispuesto. Si es un gato común o mestizo, deja "Europeo común".</div>
+      <div class="form-group"><select id="ac-breed" onchange="wzBreedInfo();wzWeightInfo()"></select></div>
+      <div class="note-box" id="wz-breed-info" style="margin:0"></div>
+    </div>
+
+    <!-- 4. Sexo -->
+    <div class="wz-step" data-step="4">
+      <div class="wz-count" id="wz-c4"></div>
+      <div class="wz-q" data-i18n="wz.q_sex">¿Macho o hembra?</div>
+      <div class="wz-help" data-i18n="wz.h_sex">El peso saludable es distinto en machos y en hembras, y la esterilización reduce sus necesidades de comida entre un 20 % y un 30 %.</div>
+      <div class="wz-choice">
+        <button type="button" class="wz-opt" data-sex="M" onclick="wzPickSex('M',this)"><span class="wz-emo">♂️</span><span data-i18n="wz.male">Macho</span></button>
+        <button type="button" class="wz-opt" data-sex="H" onclick="wzPickSex('H',this)"><span class="wz-emo">♀️</span><span data-i18n="wz.female">Hembra</span></button>
+        <button type="button" class="wz-opt" data-sex="?" onclick="wzPickSex('?',this)"><span class="wz-emo">❔</span><span data-i18n="wz.unknown">No lo sé</span></button>
+      </div>
+      <input type="hidden" id="ac-sex" value="?"/>
+      <div class="wz-q" style="font-size:15px;margin-top:20px" data-i18n="wz.q_neutered">¿Está esterilizado?</div>
+      <div class="wz-choice wz-two" style="margin-top:10px">
+        <button type="button" class="wz-opt" data-neu="1" onclick="wzPickNeutered(1,this)"><span class="wz-emo">✂️</span><span data-i18n="yes">Sí</span></button>
+        <button type="button" class="wz-opt" data-neu="0" onclick="wzPickNeutered(0,this)"><span class="wz-emo">🚫</span><span data-i18n="no">No</span></button>
+      </div>
+      <input type="hidden" id="ac-neutered" value="1"/>
+    </div>
+
+    <!-- 5. Edad -->
+    <div class="wz-step" data-step="5">
+      <div class="wz-count" id="wz-c5"></div>
+      <div class="wz-q" data-i18n="wz.q_age">¿Qué edad tiene?</div>
+      <div class="wz-help" data-i18n="wz.h_age">Con la fecha exacta te felicitamos su cumpleaños y ajustamos las revisiones: a partir de los 8 años conviene ir al veterinario cada 6 meses.</div>
+      <div class="form-group"><label data-i18n="wz.birthdate">Fecha de nacimiento</label><input type="date" id="ac-birth" onchange="wzAgeFromDate()"/></div>
+      <div class="wz-help" data-i18n="wz.h_age_approx">¿No la sabes con exactitud? Pon su edad aproximada:</div>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="wz.years">Años</label><input type="number" id="ac-age-y" min="0" max="30" placeholder="3" oninput="wzDateFromAge()"/></div>
+        <div class="form-group"><label data-i18n="wz.months">Meses</label><input type="number" id="ac-age-m" min="0" max="11" placeholder="0" oninput="wzDateFromAge()"/></div>
+      </div>
+      <div class="note-box" id="wz-age-info" style="margin:0"></div>
+    </div>
+
+    <!-- 6. Peso -->
+    <div class="wz-step" data-step="6">
+      <div class="wz-count" id="wz-c6"></div>
+      <div class="wz-q" data-i18n="wz.q_weight">¿Cuánto pesa?</div>
+      <div class="wz-help" data-i18n="wz.h_weight">Truco: súbete tú a la báscula, luego con el gato en brazos y resta. Es el dato más importante para seguir su salud.</div>
+      <div class="form-group">
+        <label data-i18n="form.weight_kg">Peso (kg)</label>
+        <input type="number" id="ac-weight" step="0.01" min="0" max="30" inputmode="decimal" placeholder="4.5" oninput="wzWeightInfo()"/>
+      </div>
+      <div class="note-box" id="wz-weight-info" style="margin:0"></div>
+    </div>
+
+    <!-- 7. Problemas crónicos -->
+    <div class="wz-step" data-step="7">
+      <div class="wz-count" id="wz-c7"></div>
+      <div class="wz-q" data-i18n="wz.q_health">¿Tiene algún problema de salud crónico?</div>
+      <div class="wz-help" data-i18n="wz.h_health">Diagnosticado por un veterinario. Con esta información la app adapta sus consejos y avisos.</div>
+      <div class="wz-choice wz-two" style="margin-bottom:16px">
+        <button type="button" class="wz-opt" id="wz-health-no" onclick="wzPickHealth(0)"><span class="wz-emo">💚</span><span data-i18n="wz.healthy">Está sano</span></button>
+        <button type="button" class="wz-opt" id="wz-health-yes" onclick="wzPickHealth(1)"><span class="wz-emo">🩺</span><span data-i18n="wz.has_cond">Sí, tiene</span></button>
+      </div>
+      <div id="wz-cond-wrap" style="display:none">
+        <div class="wz-help" style="margin-bottom:8px" data-i18n="wz.h_cond_pick">Marca todos los que tenga:</div>
+        <div class="cond-chips" id="wz-cond-chips"></div>
+        <div class="cond-add">
+          <input type="text" id="wz-cond-other" maxlength="60" placeholder="Otro problema..." data-i18n-ph="wz.ph_other" onkeydown="if(event.key==='Enter'){event.preventDefault();wzAddCondition();}"/>
+          <button type="button" onclick="wzAddCondition()" data-i18n="wz.add">Añadir</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Felicidades -->
+    <div class="wz-step" data-step="8">
+      <div class="wz-done">
+        <div class="wz-conf">🎉</div>
+        <div class="wz-done-title" id="wz-done-title">¡FELICIDADES!</div>
+        <div class="wz-done-name" id="wz-done-name"></div>
+        <div class="wz-avatar" id="wz-done-avatar">🐈</div>
+        <div class="wz-summary" id="wz-done-summary"></div>
+      </div>
+    </div>
+
+    <div class="wz-nav" id="wz-nav">
+      <button class="btn btn-ghost" id="wz-back" onclick="wzGo(-1)" data-i18n="wz.back">Atrás</button>
+      <button class="btn btn-primary" id="wz-next" onclick="wzGo(1)"><span data-i18n="wz.next">Siguiente</span></button>
+    </div>
+    <button class="wz-skip" id="wz-save-now" onclick="wzSaveAndClose()" style="display:none" data-i18n="wz.save_now">Guardar y salir</button>
   </div>
 </div>
 
@@ -993,11 +1142,36 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
   </div>
 </div>
 
-<!-- Perfil del gato -->
-<div class="modal-overlay" id="modal-profile" onclick="closeModal(event,'modal-profile')">
+<!-- Cuenta: entrar / crear cuenta -->
+<div class="modal-overlay" id="modal-auth" onclick="closeModal(event,'modal-auth')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalById('modal-profile')" aria-label="Cerrar">✕</button><div class="modal-handle"></div>
-    <div id="profile-content"></div>
+    <button class="modal-close" onclick="closeModalById('modal-auth')" aria-label="Cerrar">✕</button><div class="modal-handle"></div>
+    <div class="auth-hero">
+      <div class="auth-logo">☁️🐈</div>
+      <div class="auth-title" data-i18n="auth.title">Guarda tus gatos en la nube</div>
+      <div class="auth-sub" data-i18n="auth.sub">Crea una cuenta para conservar tus fichas y registros aunque cambies de móvil. La app sigue funcionando sin conexión.</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="auth-tab-in" onclick="setAuthMode('in')" data-i18n="auth.signin">Entrar</button>
+      <button class="auth-tab" id="auth-tab-up" onclick="setAuthMode('up')" data-i18n="auth.signup">Crear cuenta</button>
+    </div>
+    <div class="auth-msg" id="auth-msg"></div>
+    <div class="form-group" id="auth-name-group" style="display:none">
+      <label data-i18n="form.your_name">Tu nombre</label>
+      <input type="text" id="auth-name" autocomplete="name" placeholder="Ej: Eduardo" data-i18n-ph="ph.ex_user"/>
+    </div>
+    <div class="form-group">
+      <label data-i18n="form.email">Correo electrónico</label>
+      <input type="email" id="auth-email" autocomplete="email" inputmode="email" placeholder="tu@correo.com"/>
+    </div>
+    <div class="form-group">
+      <label data-i18n="form.password">Contraseña</label>
+      <input type="password" id="auth-pass" autocomplete="current-password" placeholder="••••••••"/>
+      <div class="form-hint" id="auth-pass-hint" data-i18n="hint.password">Mínimo 8 caracteres</div>
+    </div>
+    <button class="btn btn-primary btn-w" id="auth-submit" onclick="authSubmit()"><span data-i18n="auth.signin">Entrar</span></button>
+    <button class="auth-link" onclick="authForgot()" data-i18n="auth.forgot">He olvidado mi contraseña</button>
+    <button class="auth-link" onclick="closeModalById('modal-auth')" data-i18n="auth.skip">Seguir sin cuenta (solo en este móvil)</button>
   </div>
 </div>
 
@@ -1006,6 +1180,7 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModalById('modal-settings')" aria-label="Cerrar">✕</button><div class="modal-handle"></div>
     <div class="modal-title">⚙️ <span data-i18n="settings.title">Ajustes</span></div>
+    <div id="settings-account"></div>
     <div class="form-group"><label data-i18n="form.your_name">Tu nombre</label><input type="text" id="set-name" placeholder="Ej: Eduardo" data-i18n-ph="ph.ex_user"/></div>
     <button class="btn btn-primary btn-w" onclick="saveSettings()"><span data-i18n="btn.save">Guardar</span></button>
     <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="exportData()">📤 <span data-i18n="btn.export">Exportar mis datos</span></button>
@@ -1330,7 +1505,84 @@ const I18N = {
 "rem.litter":{es:"Limpiar el arenero",en:"Clean the litter box"},
 "rem.brush":{es:"Cepillado",en:"Brushing"},
 "rem.parasite":{es:"Antiparasitario externo",en:"Flea & tick treatment"},
-"rem.vaccine":{es:"Vacuna anual",en:"Annual vaccine"}
+"rem.vaccine":{es:"Vacuna anual",en:"Annual vaccine"},
+"auth.title":{es:"Guarda tus gatos en la nube",en:"Keep your cats in the cloud"},
+"auth.sub":{es:"Crea una cuenta para conservar tus fichas y registros aunque cambies de móvil. La app sigue funcionando sin conexión.",en:"Create an account to keep your profiles and records even if you change phone. The app still works offline."},
+"auth.signin":{es:"Entrar",en:"Sign in"},
+"auth.signup":{es:"Crear cuenta",en:"Sign up"},
+"auth.forgot":{es:"He olvidado mi contraseña",en:"I forgot my password"},
+"auth.skip":{es:"Seguir sin cuenta (solo en este móvil)",en:"Continue without an account (this phone only)"},
+"auth.account":{es:"Tu cuenta",en:"Your account"},
+"auth.signout":{es:"Cerrar sesión",en:"Sign out"},
+"auth.local_only":{es:"Solo en este dispositivo",en:"This device only"},
+"auth.local_hint":{es:"Tus datos están únicamente en este móvil. Si lo pierdes o desinstalas la app, se pierden.",en:"Your data lives only on this phone. If you lose it or uninstall the app, it is gone."},
+"auth.create_now":{es:"Crear cuenta o entrar",en:"Sign up or sign in"},
+"form.email":{es:"Correo electrónico",en:"Email"},
+"form.password":{es:"Contraseña",en:"Password"},
+"hint.password":{es:"Mínimo 8 caracteres",en:"At least 8 characters"},
+"sync.now":{es:"Sincronizar ahora",en:"Sync now"},
+"sync.syncing":{es:"Sincronizando...",en:"Syncing..."},
+"sync.ok":{es:"Sincronizado",en:"Synced"},
+"sync.never":{es:"Sin sincronizar todavía",en:"Not synced yet"},
+"sync.last":{es:"Última sincronización: {when}",en:"Last sync: {when}"},
+"sync.pending":{es:"Cambios pendientes de subir",en:"Changes pending upload"},
+"sync.done":{es:"✅ {up} subidos · {down} descargados",en:"✅ {up} uploaded · {down} downloaded"},
+"sync.offline":{es:"Sin conexión. Se sincronizará solo cuando vuelvas a tener red.",en:"Offline. It will sync automatically once you are back online."},
+"sync.error":{es:"No se pudo sincronizar: {msg}",en:"Could not sync: {msg}"},
+"auth.err_email":{es:"Escribe un correo electrónico válido.",en:"Please enter a valid email address."},
+"auth.err_pass":{es:"La contraseña debe tener al menos 8 caracteres.",en:"The password must be at least 8 characters."},
+"auth.err_name":{es:"Escribe tu nombre.",en:"Please enter your name."},
+"auth.ok_signup":{es:"Cuenta creada. Revisa tu correo y confirma la dirección para poder entrar.",en:"Account created. Check your email and confirm the address to sign in."},
+"auth.ok_signin":{es:"¡Hola de nuevo! Sincronizando tus datos...",en:"Welcome back! Syncing your data..."},
+"auth.ok_reset":{es:"Si esa dirección existe, te hemos enviado un correo para restablecer la contraseña.",en:"If that address exists, we have sent you a password reset email."},
+"auth.err_creds":{es:"Correo o contraseña incorrectos.",en:"Wrong email or password."},
+"auth.err_unconfirmed":{es:"Todavía no has confirmado tu correo. Revisa la bandeja de entrada y la carpeta de spam.",en:"You have not confirmed your email yet. Check your inbox and spam folder."},
+"auth.err_exists":{es:"Ya existe una cuenta con ese correo. Prueba a entrar.",en:"An account with that email already exists. Try signing in."},
+"auth.err_net":{es:"No hay conexión con el servidor. Inténtalo más tarde.",en:"Cannot reach the server. Please try again later."},
+"auth.merge":{es:"Los gatos que ya tenías en este móvil se han subido a tu cuenta.",en:"The cats already on this phone have been uploaded to your account."},
+"auth.confirm_signout":{es:"¿Cerrar sesión? Tus datos seguirán en este móvil y en la nube.",en:"Sign out? Your data stays on this phone and in the cloud."},
+"wz.step":{es:"Paso {n} de {total}",en:"Step {n} of {total}"},
+"wz.next":{es:"Siguiente",en:"Next"},
+"wz.back":{es:"Atrás",en:"Back"},
+"wz.finish":{es:"Terminar",en:"Finish"},
+"wz.save_now":{es:"Guardar y salir",en:"Save and exit"},
+"wz.see_profile":{es:"Ver su ficha",en:"See their profile"},
+"wz.q_name":{es:"¿Cómo se llama tu gato?",en:"What is your cat called?"},
+"wz.h_name":{es:"Es lo único imprescindible. Todo lo demás puedes rellenarlo ahora o más tarde.",en:"This is the only required field. Everything else can be filled in now or later."},
+"wz.pick_emoji":{es:"Elige un icono para identificarlo",en:"Pick an icon for them"},
+"wz.q_photo":{es:"Ponle cara",en:"Add their face"},
+"wz.h_photo":{es:"Elige su mejor foto. Se recorta en cuadrado y se guarda en tu móvil (y en tu cuenta, si tienes una).",en:"Choose their best photo. It is cropped square and saved on your phone (and to your account, if you have one)."},
+"wz.q_breed":{es:"¿De qué raza es?",en:"What breed are they?"},
+"wz.h_breed":{es:"Con la raza calculamos su peso ideal y te avisamos de las enfermedades a las que está predispuesto. Si es un gato común o mestizo, deja \"Europeo común\".",en:"The breed lets us work out their ideal weight and warn you about the conditions they are prone to. For a moggy or mixed cat, leave \"European Shorthair\"."},
+"wz.q_sex":{es:"¿Macho o hembra?",en:"Male or female?"},
+"wz.h_sex":{es:"El peso saludable es distinto en machos y en hembras, y la esterilización reduce sus necesidades de comida entre un 20 % y un 30 %.",en:"Healthy weight differs between males and females, and neutering cuts their food needs by 20-30 %."},
+"wz.male":{es:"Macho",en:"Male"},
+"wz.female":{es:"Hembra",en:"Female"},
+"wz.unknown":{es:"No lo sé",en:"Not sure"},
+"wz.q_neutered":{es:"¿Está esterilizado?",en:"Are they neutered?"},
+"wz.q_age":{es:"¿Qué edad tiene?",en:"How old are they?"},
+"wz.h_age":{es:"Con la fecha exacta te felicitamos su cumpleaños y ajustamos las revisiones: a partir de los 8 años conviene ir al veterinario cada 6 meses.",en:"With the exact date we can wish them a happy birthday and adjust check-ups: from age 8, a vet visit every 6 months is advised."},
+"wz.h_age_approx":{es:"¿No la sabes con exactitud? Pon su edad aproximada:",en:"Not sure of the exact date? Enter their approximate age:"},
+"wz.birthdate":{es:"Fecha de nacimiento",en:"Date of birth"},
+"wz.years":{es:"Años",en:"Years"},
+"wz.months":{es:"Meses",en:"Months"},
+"wz.q_weight":{es:"¿Cuánto pesa?",en:"How much do they weigh?"},
+"wz.h_weight":{es:"Truco: súbete tú a la báscula, luego con el gato en brazos y resta. Es el dato más importante para seguir su salud.",en:"Tip: weigh yourself, then again holding the cat, and subtract. It is the single most useful number for tracking their health."},
+"wz.q_health":{es:"¿Tiene algún problema de salud crónico?",en:"Do they have any chronic health problem?"},
+"wz.h_health":{es:"Diagnosticado por un veterinario. Con esta información la app adapta sus consejos y avisos.",en:"Diagnosed by a vet. With this, the app tailors its advice and alerts."},
+"wz.healthy":{es:"Está sano",en:"They are healthy"},
+"wz.has_cond":{es:"Sí, tiene",en:"Yes, they do"},
+"wz.h_cond_pick":{es:"Marca todos los que tenga:",en:"Tick all that apply:"},
+"wz.ph_other":{es:"Otro problema...",en:"Another problem..."},
+"wz.add":{es:"Añadir",en:"Add"},
+"wz.congrats":{es:"¡FELICIDADES!",en:"CONGRATULATIONS!"},
+"wz.done_name":{es:"Ya has registrado a {name}",en:"You have registered {name}"},
+"wz.updated":{es:"¡ACTUALIZADO!",en:"UPDATED!"},
+"wz.updated_name":{es:"Has actualizado la ficha de {name}",en:"You have updated {name}'s profile"},
+"wz.first_weight":{es:"Peso registrado en el alta.",en:"Weight logged at registration."},
+"cond.title":{es:"Sus problemas de salud",en:"Their health conditions"},
+"cond.sub":{es:"Consejos adaptados a lo que tiene",en:"Advice tailored to their conditions"},
+"cond.none":{es:"Sin problemas crónicos registrados.",en:"No chronic conditions recorded."}
 };
 
 let currentLang = 'es';
@@ -2398,9 +2650,9 @@ function openModal(id){
   }
   if(id === 'modal-settings'){
     document.getElementById('set-name').value = settings.username || '';
+    renderSettingsAccount();
     renderSettingsCatsList();
   }
-  if(id === 'modal-add-cat') renderBreedSelect();
   if(id === 'modal-reminder') renderCatSelect('rm-cat', true);
 }
 function closeModal(e, id){ if(e.target.id === id) document.getElementById(id)?.classList.remove('open'); }
@@ -2531,12 +2783,14 @@ function renderReminders(){
 }
 function toggleReminder(id, on){
   const r = recordatorios.find(x => x.id === id);
-  if(r){ r.on = on; save(LS.rem, recordatorios); renderCalendar(); }
+  if(r){ r.on = on; touch(r); save(LS.rem, recordatorios); scheduleSync(); renderCalendar(); }
 }
 function deleteReminder(id){
   if(!confirm(t('confirm.delete_rem'))) return;
   recordatorios = recordatorios.filter(r => r.id !== id);
+  tombstone('reminders', id);
   save(LS.rem, recordatorios);
+  scheduleSync();
   renderReminders(); renderCalendar();
 }
 function newReminder(){
@@ -2614,12 +2868,13 @@ function saveReminder(){
   };
   if(id){
     const r = recordatorios.find(x => x.id === id);
-    if(r){ delete r.k; Object.keys(data).forEach(k => r[k] = data[k]); }
+    if(r){ delete r.k; Object.keys(data).forEach(k => r[k] = data[k]); touch(r); }
   } else {
     data.id = 'r' + Date.now();
-    recordatorios.push(data);
+    recordatorios.push(touch(data));
   }
   save(LS.rem, recordatorios);
+  scheduleSync();
   closeModalById('modal-reminder');
   renderReminders(); renderCalendar();
   toast('✅ ' + title);
@@ -3039,6 +3294,7 @@ function renderHealthPanel(){
   renderCatProfileCard();
   renderHealthStats();
   renderBodyCondition();
+  renderConditionTips();
   renderVetCheck();
   renderWeightChart();
   renderHealthLog();
@@ -3082,6 +3338,7 @@ function renderCatProfileCard(){
           <span class="chip">${c.sex === 'M' ? '♂' : c.sex === 'H' ? '♀' : '?'}</span>
           <span class="chip">${age !== null ? num(age,1) + ' ' + (currentLang==='es'?'años':'yrs') : '—'}</span>
           <span class="chip">${c.neutered ? '✂️ ' + t('prof.neutered') : t('prof.intact')}</span>
+          ${(c.conditions || []).length ? `<span class="chip">🩺 ${c.conditions.length}</span>` : ''}
         </div>
       </div>
       <button class="pc-edit" onclick="editCat('${c.id}')" aria-label="Editar">✏️</button>
@@ -3172,6 +3429,33 @@ function renderBodyCondition(){
     <div class="bc-advice">${advice}</div>
   </div>`;
 }
+function renderConditionTips(){
+  const el = document.getElementById('cond-tips');
+  if(!el) return;
+  const c = catById(currentCat);
+  const list = (c && c.conditions) || [];
+  if(!list.length){ el.innerHTML = ''; return; }
+  el.innerHTML = `<div class="care-cat open" style="margin:0 14px 12px">
+    <div class="care-cat-hdr" onclick="this.parentElement.classList.toggle('open')">
+      <div class="care-cat-ico">🩺</div>
+      <div><div class="care-cat-title">${t('cond.title')}</div><div class="care-cat-sub">${t('cond.sub')}</div></div>
+      <svg class="care-cat-arr" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="care-cat-body">
+      ${list.map(id => {
+        const k = COND_BY_ID[id];
+        return `<div class="care-item">
+          <div class="care-item-ico">${condIcon(id)}</div>
+          <div><div class="care-item-label">${esc(condLabel(id))}</div>
+          <div class="care-item-val">${k ? esc(k.tip[currentLang] || k.tip.es) : (currentLang === 'es'
+            ? 'Anotado en su ficha. Coméntalo en cada visita al veterinario y registra cualquier cambio.'
+            : 'Noted in their profile. Mention it at every vet visit and log any change.')}</div></div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
 function buildVetFindings(c){
   const F = [];   // {lvl:'alert'|'warn'|'ok', txt}
   const logs = weightLogs(c.id);
@@ -3227,6 +3511,19 @@ function buildVetFindings(c){
   const severe = syms.filter(h => h.sev === 'grave' && daysSince(h.date) <= 21);
   if(severe.length) F.push({lvl:'alert', txt: ES ? `Hay ${severe.length} registro(s) de malestar GRAVE en las últimas 3 semanas. Si no has ido aún, acude al veterinario.` : `${severe.length} SEVERE symptom log(s) in the last 3 weeks. If you haven't already, see a vet.`});
   else if(recentSyms.length >= 3) F.push({lvl:'warn', txt: ES ? `${recentSyms.length} registros de malestar en el último mes. Un patrón repetido merece consulta.` : `${recentSyms.length} symptom logs in the last month. A repeating pattern is worth a consultation.`});
+  /* Problemas crónicos declarados */
+  const conds = c.conditions || [];
+  if(conds.indexOf('renal') >= 0 && (dVet === null || dVet > 190))
+    F.push({lvl:'alert', txt: ES ? 'Con enfermedad renal crónica conviene analítica y tensión cada 3-6 meses, y hace más de medio año de la última visita registrada.' : 'With chronic kidney disease, blood work and blood pressure every 3-6 months are advised, and the last logged visit was over six months ago.'});
+  if(conds.indexOf('diabetes') >= 0 && (dVet === null || dVet > 190))
+    F.push({lvl:'alert', txt: ES ? 'Un gato diabético necesita controles veterinarios frecuentes; hace demasiado de la última visita registrada.' : 'A diabetic cat needs frequent vet monitoring; the last logged visit was too long ago.'});
+  if(conds.indexOf('obesidad') >= 0 && range && w > range.max)
+    F.push({lvl:'warn', txt: ES ? 'Tiene la obesidad anotada como problema crónico y sigue por encima del rango: revisa el plan de pérdida de peso con tu veterinario.' : 'Obesity is logged as a chronic condition and they are still above range: review the weight-loss plan with your vet.'});
+  if(conds.indexOf('urinario') >= 0 || conds.indexOf('cistitis') >= 0)
+    F.push({lvl:'ok', txt: ES ? 'Con antecedentes urinarios, vigila cada día que orine con normalidad. En un macho, intentar orinar sin conseguirlo es una urgencia vital.' : 'With a urinary history, check daily that they urinate normally. In a male, straining without passing urine is a life-threatening emergency.'});
+  if(conds.length && (dVet === null || dVet > 400))
+    F.push({lvl:'warn', txt: ES ? 'Tiene ' + conds.length + ' problema(s) crónico(s) registrado(s) y no consta revisión reciente.' : 'They have ' + conds.length + ' chronic condition(s) logged and no recent check-up on record.'});
+
   /* Senior */
   if(senior && !F.some(f => f.txt.indexOf('revisión') >= 0 || f.txt.indexOf('check-up') >= 0)){
     F.push({lvl:'ok', txt: ES ? `Tiene ${num(age,0)} años: recuerda la analítica semestral (riñón, tiroides y tensión) propia del gato senior.` : `Aged ${num(age,0)}: remember the six-monthly senior blood panel (kidney, thyroid, blood pressure).`});
@@ -3299,7 +3596,9 @@ function renderHealthLog(){
 }
 function deleteRecord(id){
   historial = historial.filter(h => h.id !== id);
+  tombstone('records', id);
   save(LS.hist, historial);
+  scheduleSync();
   renderHealthPanel(); renderHistPanel();
 }
 
@@ -3404,12 +3703,14 @@ function saveHealthRec(){
     rec.syms = selectedSymptoms.slice();
     rec.sev = document.getElementById('h-sev').value;
   }
+  touch(rec);
   historial.unshift(rec);
   if(peso){
     const c = catById(catId);
     if(c){ c.weight = peso; save(LS.cats, gatos); }
   }
   save(LS.hist, historial);
+  scheduleSync();
   closeModalById('modal-health');
   stopDictation();
   currentCat = catId; settings.currentCat = catId; save(LS.set, settings);
@@ -3475,41 +3776,368 @@ function stopDictation(){
 /* ═══════════════════════════════════════
    GATOS: ALTA, EDICIÓN Y BORRADO
    ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ALTA GUIADA DEL GATO
+   ═══════════════════════════════════════ */
+const CAT_EMOJIS = ['🐈','🐈‍⬛','🐱','😺','😸','🐯','🦁','🐾','🧶','⭐'];
+
+/* Problemas crónicos más frecuentes en el gato, con el consejo
+   que la app usará después en el panel de salud. */
+const CONDITIONS = [
+ {id:'renal',   ico:'🫘', es:'Enfermedad renal crónica', en:'Chronic kidney disease',
+  tip:{es:'Prioriza la comida húmeda y la dieta renal pautada, ten agua fresca en varios puntos y repite analítica y tensión cada 3-6 meses.',
+       en:'Prioritise wet food and the prescribed renal diet, keep fresh water in several spots, and repeat blood work and blood pressure every 3-6 months.'}},
+ {id:'urinario',ico:'💎', es:'Piedras o cristales urinarios', en:'Urinary stones or crystals',
+  tip:{es:'La hidratación es el tratamiento: sube el porcentaje de húmedo y pon una fuente de agua. Vigila si hace esfuerzos al orinar; en un macho, no poder orinar es una urgencia vital.',
+       en:'Hydration is the treatment: increase wet food and add a water fountain. Watch for straining; in a male, being unable to urinate is a life-threatening emergency.'}},
+ {id:'cistitis',ico:'😿', es:'Cistitis idiopática (FLUTD)', en:'Idiopathic cystitis (FLUTD)',
+  tip:{es:'Es una enfermedad muy ligada al estrés. Añade areneros, alturas y escondites, mantén las rutinas y valora un difusor de feromonas.',
+       en:'Strongly stress-linked. Add litter boxes, height and hiding spots, keep routines stable and consider a pheromone diffuser.'}},
+ {id:'asma',    ico:'🫁', es:'Asma felino', en:'Feline asthma',
+  tip:{es:'Elimina del hogar humo, ambientadores, velas, aerosoles y arena con mucho polvo. Usa arena sin perfume y de bajo polvo, y ten el inhalador siempre localizado.',
+       en:'Remove smoke, air fresheners, candles, sprays and dusty litter. Use unscented low-dust litter and always know where the inhaler is.'}},
+ {id:'diabetes',ico:'🩸', es:'Diabetes', en:'Diabetes',
+  tip:{es:'Horarios de comida y de insulina fijos, dieta alta en proteína y baja en hidratos, y control estricto del peso. Aprende a reconocer una hipoglucemia.',
+       en:'Fixed meal and insulin times, high-protein low-carb diet and strict weight control. Learn to recognise hypoglycaemia.'}},
+ {id:'tiroides',ico:'🦋', es:'Hipertiroidismo', en:'Hyperthyroidism',
+  tip:{es:'Pésalo cada mes: adelgazar comiendo mucho es la señal típica de descontrol. Requiere analíticas periódicas de T4.',
+       en:'Weigh monthly: losing weight while eating a lot is the classic sign of poor control. Needs periodic T4 blood tests.'}},
+ {id:'artrosis',ico:'🦴', es:'Artrosis', en:'Arthritis',
+  tip:{es:'Pon rampas y escalones, arenero de bordes bajos y camas calientes. El sobrepeso multiplica el dolor: mantenerlo delgado es media terapia.',
+       en:'Add ramps and steps, a low-sided litter box and warm beds. Excess weight multiplies the pain: keeping them lean is half the treatment.'}},
+ {id:'corazon', ico:'❤️', es:'Problema de corazón (MCH)', en:'Heart disease (HCM)',
+  tip:{es:'Cuenta sus respiraciones en reposo: más de 30 por minuto de forma mantenida es motivo de consulta. Ecocardiografía de control según pauta.',
+       en:'Count resting breaths: consistently over 30 per minute warrants a visit. Follow-up echocardiography as scheduled.'}},
+ {id:'alergia_alim', ico:'🍽️', es:'Alergia alimentaria', en:'Food allergy',
+  tip:{es:'Mantén la dieta de eliminación a rajatabla: ni un premio, ni restos, ni pasta de malta sin comprobar el ingrediente.',
+       en:'Keep the elimination diet strictly: no treats, no leftovers, no malt paste without checking the ingredient.'}},
+ {id:'dermatitis', ico:'🩹', es:'Alergia de piel o dermatitis', en:'Skin allergy or dermatitis',
+  tip:{es:'Antiparasitario al día (la alergia a la pulga es la causa más común) y omega-3 en la dieta. Anota los brotes para detectar el patrón.',
+       en:'Keep flea control up to date (flea allergy is the commonest cause) and add omega-3. Log flare-ups to spot the pattern.'}},
+ {id:'digestivo', ico:'🌀', es:'Problema digestivo crónico (EII)', en:'Chronic digestive disease (IBD)',
+  tip:{es:'Cambios de alimento muy lentos, dieta constante y registro de cada vómito o diarrea para que el veterinario vea la evolución real.',
+       en:'Change food very gradually, keep the diet constant and log every vomit or diarrhoea so your vet sees the real trend.'}},
+ {id:'dental',  ico:'🦷', es:'Enfermedad dental o gingivitis', en:'Dental disease or gingivitis',
+  tip:{es:'Revisión de boca cada 6 meses. Si come ladeando la cabeza, babea o deja caer la comida, tiene dolor aunque siga comiendo.',
+       en:'Mouth check every 6 months. Eating with the head tilted, drooling or dropping food means pain, even if they keep eating.'}},
+ {id:'obesidad',ico:'⚖️', es:'Obesidad', en:'Obesity',
+  tip:{es:'Nunca lo pongas a dieta por tu cuenta: una pérdida brusca puede causar lipidosis hepática. Objetivo seguro: 0,5-1 % del peso por semana.',
+       en:'Never crash-diet a cat: rapid loss can cause hepatic lipidosis. Safe target: 0.5-1 % of body weight per week.'}},
+ {id:'fiv_felv',ico:'🛡️', es:'FIV o leucemia felina (FeLV)', en:'FIV or feline leukaemia (FeLV)',
+  tip:{es:'Vida estrictamente de interior, revisiones cada 6 meses y consulta rápida ante cualquier infección: su sistema inmunitario responde peor.',
+       en:'Strictly indoor life, check-ups every 6 months and a quick visit at any infection: their immune system copes worse.'}},
+ {id:'epilepsia',ico:'⚡', es:'Epilepsia', en:'Epilepsy',
+  tip:{es:'Anota fecha, duración y aspecto de cada crisis. Medicación siempre a la misma hora. Una crisis de más de 5 minutos es una urgencia.',
+       en:'Log the date, length and look of every seizure. Give medication at the same time daily. A seizure over 5 minutes is an emergency.'}},
+ {id:'ojos',    ico:'👁️', es:'Problema ocular crónico', en:'Chronic eye problem',
+  tip:{es:'Limpieza diaria con suero fisiológico y gasa distinta para cada ojo. En brotes de herpesvirus, la L-lisina puede ayudar si te la pauta el veterinario.',
+       en:'Clean daily with saline and a separate gauze for each eye. In herpesvirus flare-ups, L-lysine may help if your vet prescribes it.'}},
+ {id:'estrenimiento',ico:'🚽', es:'Estreñimiento crónico', en:'Chronic constipation',
+  tip:{es:'Más agua y más comida húmeda, fibra según pauta y arenero siempre limpio. Si pasa 48 h sin defecar, consulta.',
+       en:'More water and wet food, fibre as prescribed and a spotless litter box. If 48 h pass with no stool, see your vet.'}},
+ {id:'higado',  ico:'🫀', es:'Problema de hígado', en:'Liver problem',
+  tip:{es:'Que no deje de comer nunca: en un gato con el hígado tocado, 48 h de ayuno son muy peligrosas. Nada de suplementos sin consultar.',
+       en:'Never let them stop eating: in a cat with liver disease, 48 h of fasting is very dangerous. No supplements without asking.'}}
+];
+const COND_BY_ID = {};
+CONDITIONS.forEach(c => COND_BY_ID[c.id] = c);
+function condLabel(id){
+  const c = COND_BY_ID[id];
+  return c ? (currentLang === 'en' ? c.en : c.es) : id;   /* si no está en la lista, es un texto libre del usuario */
+}
+function condIcon(id){ const c = COND_BY_ID[id]; return c ? c.ico : '📌'; }
+
+/* ── Estado del asistente ── */
+const WZ_TOTAL = 8;
+let wzStep = 1, wzEdit = false, wzConditions = [], wzHasCond = null;
+
+function wzRenderEmojis(){
+  const el = document.getElementById('wz-emoji-row');
+  const cur = document.getElementById('ac-emoji').value || '🐈';
+  el.innerHTML = CAT_EMOJIS.map(e =>
+    `<button type="button" class="wz-emoji${e === cur ? ' active' : ''}" onclick="wzPickEmoji('${e}')">${e}</button>`).join('');
+}
+function wzPickEmoji(e){
+  document.getElementById('ac-emoji').value = e;
+  wzRenderEmojis();
+}
+function wzRenderConditions(){
+  const el = document.getElementById('wz-cond-chips');
+  const known = CONDITIONS.map(c =>
+    `<button type="button" class="cond-chip${wzConditions.indexOf(c.id) >= 0 ? ' active' : ''}" onclick="wzToggleCondition('${c.id}')">${c.ico} ${esc(currentLang === 'en' ? c.en : c.es)}</button>`);
+  const custom = wzConditions.filter(id => !COND_BY_ID[id]).map(id =>
+    `<button type="button" class="cond-chip active" onclick="wzToggleCondition('${esc(id).replace(/'/g,"&#39;")}')">📌 ${esc(id)} ✕</button>`);
+  el.innerHTML = known.concat(custom).join('');
+}
+function wzToggleCondition(id){
+  const i = wzConditions.indexOf(id);
+  if(i >= 0) wzConditions.splice(i,1); else wzConditions.push(id);
+  wzRenderConditions();
+}
+function wzAddCondition(){
+  const input = document.getElementById('wz-cond-other');
+  const v = (input.value || '').trim();
+  if(!v) return;
+  if(wzConditions.indexOf(v) < 0) wzConditions.push(v);
+  input.value = '';
+  wzRenderConditions();
+}
+function wzPickHealth(has){
+  wzHasCond = has;
+  document.getElementById('wz-health-no').classList.toggle('active', has === 0);
+  document.getElementById('wz-health-yes').classList.toggle('active', has === 1);
+  document.getElementById('wz-cond-wrap').style.display = has === 1 ? '' : 'none';
+  if(has === 0) wzConditions = [];
+  wzRenderConditions();
+  wzValidate();
+}
+function wzPickSex(v, btn){
+  document.getElementById('ac-sex').value = v;
+  document.querySelectorAll('.wz-opt[data-sex]').forEach(b => b.classList.toggle('active', b === btn));
+  wzWeightInfo();
+}
+function wzPickNeutered(v, btn){
+  document.getElementById('ac-neutered').value = String(v);
+  document.querySelectorAll('.wz-opt[data-neu]').forEach(b => b.classList.toggle('active', b === btn));
+}
+function wzBreedInfo(){
+  const b = BREED_BY_ID[document.getElementById('ac-breed').value];
+  const el = document.getElementById('wz-breed-info');
+  if(!b || !el) return;
+  const ES = currentLang === 'es';
+  el.innerHTML = `${b.emoji} <strong>${esc(breedName(b))}</strong> · ${esc(breedOrigin(b))}<br/>
+    ⚖️ ${ES ? 'Peso sano' : 'Healthy weight'}: ♂ ${b.wM[0]}–${b.wM[1]} kg · ♀ ${b.wF[0]}–${b.wF[1]} kg<br/>
+    🩺 ${esc(b.health.split('.')[0])}.`;
+}
+function wzAgeFromDate(){
+  const v = document.getElementById('ac-birth').value;
+  if(!v) return;
+  const months = Math.max(0, Math.round((Date.now() - parseISO(v).getTime()) / (30.44*86400000)));
+  document.getElementById('ac-age-y').value = Math.floor(months/12);
+  document.getElementById('ac-age-m').value = months % 12;
+  wzAgeInfo();
+}
+function wzDateFromAge(){
+  const y = parseInt(document.getElementById('ac-age-y').value) || 0;
+  const m = parseInt(document.getElementById('ac-age-m').value) || 0;
+  if(!y && !m){ wzAgeInfo(); return; }
+  const d = new Date();
+  d.setMonth(d.getMonth() - (y*12 + m));
+  document.getElementById('ac-birth').value = isoOf(d);
+  wzAgeInfo();
+}
+function wzAgeInfo(){
+  const el = document.getElementById('wz-age-info');
+  const v = document.getElementById('ac-birth').value;
+  const ES = currentLang === 'es';
+  if(!v){ el.innerHTML = ES ? 'Puedes dejarlo en blanco y añadirlo más tarde.' : 'You can leave this blank and add it later.'; return; }
+  const years = (Date.now() - parseISO(v).getTime()) / (365.25*24*3600*1000);
+  const hum = humanAge(years);
+  let etapa;
+  if(years < 1) etapa = ES ? 'Gatito: comida de gatito a demanda y desparasitación cada 15 días' : 'Kitten: kitten food on demand and deworming every 2 weeks';
+  else if(years < 7) etapa = ES ? 'Adulto: revisión veterinaria una vez al año' : 'Adult: one vet check-up a year';
+  else if(years < 11) etapa = ES ? 'Maduro: revisión cada 6 meses con analítica' : 'Mature: check-up every 6 months with blood work';
+  else etapa = ES ? 'Senior: revisión cada 6 meses, vigila peso, sed y movilidad' : 'Senior: check-up every 6 months; watch weight, thirst and mobility';
+  el.innerHTML = `🎂 ${num(years,1)} ${ES ? 'años' : 'years'} · 🧑 ${ES ? 'equivalen a unos' : 'about'} ${hum} ${ES ? 'años humanos' : 'human years'}<br/>${etapa}.`;
+}
+function wzWeightInfo(){
+  const el = document.getElementById('wz-weight-info');
+  const w = parseFloat(document.getElementById('ac-weight').value);
+  const b = BREED_BY_ID[document.getElementById('ac-breed').value];
+  const sex = document.getElementById('ac-sex').value;
+  const ES = currentLang === 'es';
+  if(!b){ el.innerHTML = ''; return; }
+  const r = sex === 'M' ? b.wM : sex === 'H' ? b.wF : [Math.min(b.wF[0],b.wM[0]), Math.max(b.wF[1],b.wM[1])];
+  if(!w){ el.innerHTML = `${ES ? 'Rango sano para su raza y sexo' : 'Healthy range for the breed and sex'}: <strong>${r[0]}–${r[1]} kg</strong>.`; return; }
+  let veredicto, ico;
+  if(w < r[0]*0.92){ ico='🟠'; veredicto = ES ? 'Está por debajo del rango. Coméntalo con tu veterinario.' : 'Below the range. Mention it to your vet.'; }
+  else if(w < r[0]){ ico='🟡'; veredicto = ES ? 'Algo por debajo del rango.' : 'Slightly below the range.'; }
+  else if(w <= r[1]){ ico='🟢'; veredicto = ES ? 'Está en su peso ideal. ¡Muy bien!' : 'Right at the ideal weight. Well done!'; }
+  else if(w <= r[1]*1.2){ ico='🟠'; veredicto = ES ? 'Por encima del rango: conviene ajustar la ración.' : 'Above the range: worth adjusting the portion.'; }
+  else { ico='🔴'; veredicto = ES ? 'Bastante por encima. Pide un plan de pérdida de peso al veterinario.' : 'Well above. Ask your vet for a weight-loss plan.'; }
+  el.innerHTML = `${ico} ${veredicto}<br/>${ES ? 'Rango sano para su raza y sexo' : 'Healthy range for the breed and sex'}: <strong>${r[0]}–${r[1]} kg</strong>.`;
+}
+
+/* ── Navegación ── */
+function wzShow(n){
+  wzStep = Math.max(1, Math.min(WZ_TOTAL, n));
+  document.querySelectorAll('.wz-step').forEach(el =>
+    el.classList.toggle('active', +el.dataset.step === wzStep));
+  document.getElementById('wz-progress').innerHTML =
+    Array.from({length: WZ_TOTAL}, (_,i) => `<div class="wz-seg${i < wzStep ? ' done' : ''}"></div>`).join('');
+  for(let i = 1; i <= 7; i++){
+    const c = document.getElementById('wz-c' + i);
+    if(c) c.textContent = t('wz.step',{n:i, total:WZ_TOTAL - 1});
+  }
+  const back = document.getElementById('wz-back');
+  const next = document.getElementById('wz-next');
+  const saveNow = document.getElementById('wz-save-now');
+  back.style.display = (wzStep === 1 || wzStep === WZ_TOTAL) ? 'none' : '';
+  saveNow.style.display = (wzEdit && wzStep < WZ_TOTAL) ? '' : 'none';
+  next.querySelector('span').textContent =
+    wzStep === WZ_TOTAL ? t('wz.see_profile') :
+    wzStep === 7 ? (wzEdit ? t('btn.save_cat') : t('wz.finish')) : t('wz.next');
+  if(wzStep === 3) wzBreedInfo();
+  if(wzStep === 5) wzAgeInfo();
+  if(wzStep === 6) wzWeightInfo();
+  if(wzStep === 8) wzRenderDone();
+  wzValidate();
+  const sheet = document.querySelector('#modal-add-cat .modal-sheet');
+  if(sheet) sheet.scrollTop = 0;
+}
+function wzValidate(){
+  const next = document.getElementById('wz-next');
+  if(!next) return;
+  let ok = true;
+  if(wzStep === 1) ok = !!(document.getElementById('ac-name').value || '').trim();
+  if(wzStep === 7) ok = (wzHasCond !== null);
+  next.disabled = !ok;
+  next.style.opacity = ok ? '1' : '.5';
+}
+function wzGo(dir){
+  if(dir > 0 && wzStep === WZ_TOTAL){        /* "Ver su ficha" */
+    closeModalById('modal-add-cat');
+    switchTab('salud', document.querySelectorAll('#nav .nb')[3]);
+    return;
+  }
+  if(dir > 0 && wzStep === 7){               /* guardar y celebrar */
+    if(!wzCommit()) return;
+    wzShow(8);
+    return;
+  }
+  wzShow(wzStep + dir);
+}
+function wzSaveAndClose(){
+  if(!wzCommit()) return;
+  closeModalById('modal-add-cat');
+  toast('✅ ' + (document.getElementById('ac-name').value || '').trim());
+}
+
+/* ── Guardado ── */
+function wzCommit(){
+  const name = (document.getElementById('ac-name').value || '').trim();
+  if(!name){ wzShow(1); alert(t('alert.need_name')); return false; }
+  const id = document.getElementById('ac-id').value;
+  const data = {
+    name,
+    emoji: document.getElementById('ac-emoji').value || '🐈',
+    photo: pendingCatPhoto || null,
+    breed: document.getElementById('ac-breed').value,
+    sex: document.getElementById('ac-sex').value,
+    birth: document.getElementById('ac-birth').value || '',
+    weight: parseFloat(document.getElementById('ac-weight').value) || 0,
+    neutered: document.getElementById('ac-neutered').value === '1' ? 1 : 0,
+    conditions: wzConditions.slice()
+  };
+  if(id){
+    const c = catById(id);
+    if(c){
+      Object.keys(data).forEach(k => c[k] = data[k]);
+      if(photoKey(c.photo) !== c.photoKey) c.photoPath = c.photo ? c.photoPath : null;
+      touch(c);
+    }
+  } else {
+    if(gatos.length >= MAX_CATS){ alert(t('cat.limit_reached',{max:MAX_CATS})); return false; }
+    data.id = 'c' + Date.now();
+    gatos.push(touch(data));
+    currentCat = data.id;
+    settings.currentCat = currentCat;
+    /* Primer peso registrado en el alta: así el seguimiento arranca con un dato */
+    if(data.weight > 0){
+      historial.unshift(touch({id:'h' + Date.now(), catId:data.id, type:'peso', date:isoToday(),
+        peso:data.weight, long:null, bcs:null, notes:t('wz.first_weight')}));
+      save(LS.hist, historial);
+    }
+  }
+  save(LS.cats, gatos); save(LS.set, settings);
+  scheduleSync();
+  renderAll();
+  return true;
+}
+function wzRenderDone(){
+  const name = (document.getElementById('ac-name').value || '').trim();
+  const c = catById(document.getElementById('ac-id').value) || gatos.find(x => x.name === name) || {};
+  const ES = currentLang === 'es';
+  document.getElementById('wz-done-title').textContent = wzEdit ? t('wz.updated') : t('wz.congrats');
+  document.getElementById('wz-done-name').textContent = t(wzEdit ? 'wz.updated_name' : 'wz.done_name', {name});
+  const av = document.getElementById('wz-done-avatar');
+  if(c.photo){ av.outerHTML = `<img class="wz-avatar" id="wz-done-avatar" src="${c.photo}" alt="${esc(name)}"/>`; }
+  else { av.outerHTML = `<div class="wz-avatar" id="wz-done-avatar">${esc(c.emoji || '🐈')}</div>`; }
+  const b = BREED_BY_ID[c.breed];
+  const years = catAgeYears(c);
+  const rows = [
+    [ES ? 'Raza' : 'Breed', b ? breedName(b) : '—'],
+    [ES ? 'Sexo' : 'Sex', c.sex === 'M' ? t('wz.male') : c.sex === 'H' ? t('wz.female') : t('wz.unknown')],
+    [ES ? 'Edad' : 'Age', years !== null ? num(years,1) + (ES ? ' años' : ' yrs') : '—'],
+    [ES ? 'Peso' : 'Weight', c.weight ? num(c.weight,2) + ' kg' : '—'],
+    [ES ? 'Esterilizado' : 'Neutered', c.neutered ? t('yes') : t('no')]
+  ];
+  let html = rows.map(r => `<div class="wz-sum-row"><span>${esc(r[0])}</span><span>${esc(r[1])}</span></div>`).join('');
+  if(c.conditions && c.conditions.length){
+    html += `<div class="wz-sum-row" style="display:block"><span>${ES ? 'Problemas crónicos' : 'Chronic conditions'}</span>
+      <div class="cond-badges">${c.conditions.map(id => `<span class="chip chip-red">${condIcon(id)} ${esc(condLabel(id))}</span>`).join('')}</div></div>`;
+  }
+  document.getElementById('wz-done-summary').innerHTML = html;
+}
+
+/* ── Apertura del asistente ── */
 function newCat(){
   if(gatos.length >= MAX_CATS){ alert(t('cat.limit_reached',{max:MAX_CATS})); return; }
+  wzEdit = false;
+  wzConditions = []; wzHasCond = null;
+  pendingCatPhoto = null;
+  renderBreedSelect();
   document.getElementById('ac-id').value = '';
   document.getElementById('ac-name').value = '';
-  document.getElementById('ac-sex').value = 'H';
-  document.getElementById('ac-birth').value = '';
-  document.getElementById('ac-weight').value = '';
+  document.getElementById('ac-emoji').value = '🐈';
+  document.getElementById('ac-breed').value = 'europeo';
+  document.getElementById('ac-sex').value = '?';
   document.getElementById('ac-neutered').value = '1';
-  document.getElementById('ac-emoji').value = '';
+  document.getElementById('ac-birth').value = '';
+  document.getElementById('ac-age-y').value = '';
+  document.getElementById('ac-age-m').value = '';
+  document.getElementById('ac-weight').value = '';
   document.getElementById('ac-photo-preview').innerHTML = `<span class="photo-placeholder">📷<br><small>${t('photo.add')}</small></span>`;
-  document.getElementById('ac-modal-title').textContent = t('cat.new');
-  document.getElementById('ac-save-label').textContent = t('btn.add_cat');
-  pendingCatPhoto = null;
-  openModal('modal-add-cat');
+  document.querySelectorAll('.wz-opt').forEach(b => b.classList.remove('active'));
+  document.querySelector('.wz-opt[data-sex="?"]')?.classList.add('active');
+  document.querySelector('.wz-opt[data-neu="1"]')?.classList.add('active');
+  document.getElementById('wz-cond-wrap').style.display = 'none';
+  wzRenderEmojis(); wzRenderConditions();
+  wzShow(1);
+  document.getElementById('modal-add-cat').classList.add('open');
+  setTimeout(() => document.getElementById('ac-name').focus(), 350);
 }
 function editCat(id){
   const c = catById(id);
   if(!c) return;
+  wzEdit = true;
+  wzConditions = (c.conditions || []).slice();
+  wzHasCond = wzConditions.length ? 1 : 0;
+  pendingCatPhoto = c.photo || null;
   renderBreedSelect();
   document.getElementById('ac-id').value = c.id;
   document.getElementById('ac-name').value = c.name;
+  document.getElementById('ac-emoji').value = c.emoji || '🐈';
   document.getElementById('ac-breed').value = c.breed || 'europeo';
   document.getElementById('ac-sex').value = c.sex || '?';
+  document.getElementById('ac-neutered').value = c.neutered ? '1' : '0';
   document.getElementById('ac-birth').value = c.birth || '';
   document.getElementById('ac-weight').value = c.weight || '';
-  document.getElementById('ac-neutered').value = c.neutered ? '1' : '0';
-  document.getElementById('ac-emoji').value = c.emoji || '';
   document.getElementById('ac-photo-preview').innerHTML = c.photo
     ? `<img src="${c.photo}" alt=""/>`
     : `<span class="photo-placeholder">📷<br><small>${t('photo.add')}</small></span>`;
-  document.getElementById('ac-modal-title').textContent = t('cat.edit');
-  document.getElementById('ac-save-label').textContent = t('btn.save_cat');
-  pendingCatPhoto = c.photo || null;
+  document.querySelectorAll('.wz-opt').forEach(b => b.classList.remove('active'));
+  document.querySelector('.wz-opt[data-sex="' + (c.sex || '?') + '"]')?.classList.add('active');
+  document.querySelector('.wz-opt[data-neu="' + (c.neutered ? 1 : 0) + '"]')?.classList.add('active');
+  document.getElementById('wz-health-no').classList.toggle('active', wzHasCond === 0);
+  document.getElementById('wz-health-yes').classList.toggle('active', wzHasCond === 1);
+  document.getElementById('wz-cond-wrap').style.display = wzHasCond === 1 ? '' : 'none';
+  wzRenderEmojis(); wzRenderConditions();
+  if(c.birth) wzAgeFromDate();
+  wzShow(1);
   document.getElementById('modal-add-cat').classList.add('open');
 }
+
 function handleCatPhoto(event){
   const file = event.target.files[0];
   if(!file) return;
@@ -3529,46 +4157,22 @@ function handleCatPhoto(event){
   };
   reader.readAsDataURL(file);
 }
-function saveCat(){
-  const name = (document.getElementById('ac-name').value || '').trim();
-  if(!name) return alert(t('alert.need_name'));
-  const id = document.getElementById('ac-id').value;
-  const data = {
-    name,
-    emoji: (document.getElementById('ac-emoji').value || '').trim() || '🐈',
-    photo: pendingCatPhoto || null,
-    breed: document.getElementById('ac-breed').value,
-    sex: document.getElementById('ac-sex').value,
-    birth: document.getElementById('ac-birth').value || '',
-    weight: parseFloat(document.getElementById('ac-weight').value) || 0,
-    neutered: document.getElementById('ac-neutered').value === '1' ? 1 : 0
-  };
-  if(id){
-    const c = catById(id);
-    if(c) Object.keys(data).forEach(k => c[k] = data[k]);
-  } else {
-    if(gatos.length >= MAX_CATS){ alert(t('cat.limit_reached',{max:MAX_CATS})); return; }
-    data.id = 'c' + Date.now();
-    gatos.push(data);
-    currentCat = data.id;
-    settings.currentCat = currentCat;
-  }
-  save(LS.cats, gatos); save(LS.set, settings);
-  closeModalById('modal-add-cat');
-  pendingCatPhoto = null;
-  renderAll();
-  toast('✅ ' + name);
-}
+function saveCat(){ wzCommit(); }
+
 function deleteCat(id){
   const c = catById(id);
   if(!c) return;
   if(!confirm(t('confirm.delete_cat',{name:c.name}))) return;
+  historial.filter(h => h.catId === id).forEach(h => tombstone('records', h.id));
+  tombstone('cats', id);
+  if(c.photoPath && signedIn()) deletePhoto(c.photoPath);
   gatos = gatos.filter(x => x.id !== id);
   historial = historial.filter(h => h.catId !== id);
-  recordatorios.forEach(r => { if(r.catId === id) r.catId = ''; });
+  recordatorios.forEach(r => { if(r.catId === id){ r.catId = ''; touch(r); } });
   if(currentCat === id) currentCat = gatos[0]?.id || null;
   settings.currentCat = currentCat;
   save(LS.cats, gatos); save(LS.hist, historial); save(LS.rem, recordatorios); save(LS.set, settings);
+  scheduleSync();
   renderAll();
   toast(t('alert.deleted'));
 }
@@ -3935,13 +4539,456 @@ function exportData(){
 }
 function clearAllData(){
   if(!confirm(t('confirm.delete_all'))) return;
-  [LS.cats, LS.hist, LS.rem, LS.set, LS.fired, LS.onb, 'cht_snoozes'].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
+  [LS.cats, LS.hist, LS.rem, LS.set, LS.fired, LS.onb, 'cht_snoozes', 'cht_tomb', 'cht_sync'].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
   location.reload();
 }
 function finishOnboarding(){
   try { localStorage.setItem(LS.onb, '1'); } catch(e){}
   closeModalById('modal-onboard');
   ensureAudio();
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   NUBE (Supabase)
+   Cliente REST propio, sin librerías externas, para que la app
+   siga siendo un único archivo que funciona también sin conexión.
+   La clave publicable es pública por diseño: lo que protege los
+   datos es la seguridad por filas (RLS) del servidor, que impide
+   que una cuenta vea o toque los datos de otra.
+   ═══════════════════════════════════════════════════════════ */
+const CLOUD = {
+  url: 'https://vwdnipvfjqeeezuhjstk.supabase.co',
+  key: 'sb_publishable_IaZfQVR-WH-UVLlolwngGA_ovzbdbPH',
+  bucket: 'cat-photos'
+};
+
+let session   = load('cht_session', null);
+let tomb      = load('cht_tomb', {cats:{}, records:{}, reminders:{}});
+let syncState = load('cht_sync', {last:null});
+let syncing   = false;
+let syncTimer = null;
+let authMode  = 'in';
+
+function cloudConfigured(){ return !!(CLOUD.url && CLOUD.key); }
+function signedIn(){ return !!(session && session.access_token); }
+function touch(o){ o.u = Date.now(); return o; }
+function tombstone(kind, id){ tomb[kind][id] = Date.now(); save('cht_tomb', tomb); }
+
+/* ── Peticiones ── */
+async function apiFetch(path, opts){
+  opts = opts || {};
+  const headers = Object.assign({apikey: CLOUD.key}, opts.headers || {});
+  if(opts.auth !== false && signedIn()) headers['Authorization'] = 'Bearer ' + session.access_token;
+  if(opts.json !== undefined){ headers['Content-Type'] = 'application/json'; }
+  const res = await fetch(CLOUD.url + path, {
+    method: opts.method || 'GET',
+    headers,
+    body: opts.json !== undefined ? JSON.stringify(opts.json) : opts.body
+  });
+  if(res.status === 204) return null;
+  const text = await res.text();
+  let data = null;
+  try { data = text ? JSON.parse(text) : null; } catch(e){ data = text; }
+  if(!res.ok){
+    const err = new Error((data && (data.error_description || data.msg || data.message || data.error)) || ('HTTP ' + res.status));
+    err.status = res.status; err.data = data;
+    throw err;
+  }
+  return data;
+}
+
+/* Renueva el token si le quedan menos de dos minutos de vida */
+async function ensureToken(){
+  if(!signedIn()) throw new Error('no-session');
+  if(session.expires_at && (session.expires_at * 1000 - Date.now()) > 120000) return;
+  const data = await apiFetch('/auth/v1/token?grant_type=refresh_token', {
+    method:'POST', auth:false, json:{refresh_token: session.refresh_token}
+  });
+  storeSession(data);
+}
+function storeSession(data){
+  if(!data || !data.access_token) return;
+  session = {
+    access_token: data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at: data.expires_at || Math.floor(Date.now()/1000) + (data.expires_in || 3600),
+    user: {id: data.user && data.user.id, email: data.user && data.user.email}
+  };
+  save('cht_session', session);
+}
+
+/* ── Autenticación ── */
+async function signUp(email, password, name){
+  const data = await apiFetch('/auth/v1/signup', {
+    method:'POST', auth:false,
+    json:{email, password, data:{display_name: name}}
+  });
+  if(data && data.access_token){ storeSession(data); return 'session'; }
+  return 'confirm';                       // hay que confirmar el correo
+}
+async function signIn(email, password){
+  const data = await apiFetch('/auth/v1/token?grant_type=password', {
+    method:'POST', auth:false, json:{email, password}
+  });
+  storeSession(data);
+}
+async function resetPassword(email){
+  await apiFetch('/auth/v1/recover', {method:'POST', auth:false, json:{email}});
+}
+async function signOut(){
+  try { await ensureToken(); await apiFetch('/auth/v1/logout', {method:'POST', json:{}}); } catch(e){}
+  session = null;
+  try { localStorage.removeItem('cht_session'); } catch(e){}
+  syncState = {last:null}; save('cht_sync', syncState);
+  updateCloudUi();
+  renderSettingsAccount();
+}
+
+/* ── Acceso a los datos ── */
+async function db(table, opts){
+  opts = opts || {};
+  await ensureToken();
+  const headers = {};
+  if(opts.prefer) headers['Prefer'] = opts.prefer;
+  return apiFetch('/rest/v1/' + table + (opts.query || ''), {
+    method: opts.method || 'GET', headers, json: opts.json
+  });
+}
+async function upsert(table, rows){
+  if(!rows.length) return [];
+  const out = [];
+  for(let i = 0; i < rows.length; i += 200){        // por lotes, para no mandar peticiones enormes
+    const chunk = await db(table, {
+      method:'POST',
+      query:'?on_conflict=user_id,local_id',
+      prefer:'resolution=merge-duplicates,return=representation',
+      json: rows.slice(i, i+200)
+    });
+    if(Array.isArray(chunk)) out.push.apply(out, chunk);
+  }
+  return out;
+}
+
+/* ── Fotos ── */
+function photoKey(dataUrl){ return dataUrl ? (dataUrl.length + ':' + dataUrl.slice(-24)) : ''; }
+function dataUrlToBlob(dataUrl){
+  const parts = dataUrl.split(',');
+  const mime = (parts[0].match(/:(.*?);/) || [,'image/jpeg'])[1];
+  const bin = atob(parts[1]);
+  const arr = new Uint8Array(bin.length);
+  for(let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return new Blob([arr], {type: mime});
+}
+function blobToDataUrl(blob){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+async function uploadPhoto(cat){
+  const path = session.user.id + '/' + cat.id + '.jpg';
+  await ensureToken();
+  const res = await fetch(CLOUD.url + '/storage/v1/object/' + CLOUD.bucket + '/' + path, {
+    method:'POST',
+    headers:{apikey:CLOUD.key, Authorization:'Bearer ' + session.access_token, 'x-upsert':'true', 'Content-Type':'image/jpeg'},
+    body: dataUrlToBlob(cat.photo)
+  });
+  if(!res.ok) throw new Error('storage ' + res.status);
+  return path;
+}
+async function downloadPhoto(path){
+  await ensureToken();
+  const res = await fetch(CLOUD.url + '/storage/v1/object/authenticated/' + CLOUD.bucket + '/' + path, {
+    headers:{apikey:CLOUD.key, Authorization:'Bearer ' + session.access_token}
+  });
+  if(!res.ok) return null;
+  return blobToDataUrl(await res.blob());
+}
+async function deletePhoto(path){
+  try {
+    await ensureToken();
+    await fetch(CLOUD.url + '/storage/v1/object/' + CLOUD.bucket + '/' + path, {
+      method:'DELETE',
+      headers:{apikey:CLOUD.key, Authorization:'Bearer ' + session.access_token}
+    });
+  } catch(e){}
+}
+
+/* ── Conversión entre el modelo local y las filas del servidor ── */
+function catToRow(c, uid){
+  return {user_id:uid, local_id:c.id, name:c.name, emoji:c.emoji || '🐈',
+    photo_path:c.photoPath || null, breed:c.breed || null,
+    sex:(['M','H','?'].indexOf(c.sex) >= 0 ? c.sex : '?'),
+    birth:c.birth || null, weight:c.weight || null, neutered:!!c.neutered,
+    conditions:c.conditions || []};
+}
+function rowToCat(r, prev){
+  return {id:r.local_id, name:r.name, emoji:r.emoji || '🐈',
+    photo:(prev && prev.photo) || null, photoPath:r.photo_path || null,
+    photoKey:(prev && prev.photoKey) || '',
+    breed:r.breed || 'europeo', sex:r.sex || '?', birth:r.birth || '',
+    weight:r.weight === null ? 0 : Number(r.weight), neutered:r.neutered ? 1 : 0,
+    conditions:r.conditions || [],
+    u:Date.parse(r.updated_at) || Date.now()};
+}
+function recToRow(h, uid, catUuid){
+  return {user_id:uid, cat_id:catUuid, local_id:h.id, type:h.type, date:h.date,
+    weight:h.peso || null, length_cm:h.long || null, bcs:h.bcs || null,
+    severity:h.sev || null, symptoms:h.syms || [], notes:h.notes || null};
+}
+function rowToRec(r, catLocalId){
+  return {id:r.local_id, catId:catLocalId, type:r.type, date:r.date,
+    peso:r.weight === null ? null : Number(r.weight),
+    long:r.length_cm === null ? null : Number(r.length_cm),
+    bcs:r.bcs || null, sev:r.severity || null, syms:r.symptoms || [],
+    notes:r.notes || '', u:Date.parse(r.updated_at) || Date.now()};
+}
+function remToRow(r, uid, catUuid){
+  return {user_id:uid, cat_id:catUuid || null, local_id:r.id, icon:r.ico || '🔔',
+    title:r.title, i18n_key:r.k || null, freq:r.freq || 'daily',
+    time_of_day:(r.time || '09:00'), times:r.times || [], weekdays:r.days || [],
+    every_n:Math.max(1, Math.min(365, r.n || 1)), start_date:r.date || null,
+    alarm:(r.alarm === undefined ? 2 : r.alarm), enabled:!!r.on};
+}
+function rowToRem(r, catLocalId){
+  return {id:r.local_id, ico:r.icon || '🔔', title:r.title, k:r.i18n_key || undefined,
+    freq:r.freq, time:(r.time_of_day || '09:00').slice(0,5), times:r.times || [],
+    days:r.weekdays || [], n:r.every_n || 1, date:r.start_date || null,
+    catId:catLocalId || '', alarm:r.alarm, on:!!r.enabled,
+    u:Date.parse(r.updated_at) || Date.now()};
+}
+
+/* ── Sincronización ──
+   Orden: primero las bajas de este móvil, después se baja lo remoto
+   (para enterarnos de lo que han borrado o cambiado en otro dispositivo)
+   y por último se sube solo lo que aquí es más nuevo. Subir antes de
+   bajar resucitaría lo que se hubiera borrado en el otro móvil.        */
+async function syncNow(silent){
+  if(!signedIn() || syncing) return;
+  if(!navigator.onLine){ if(!silent) toast(t('sync.offline')); return; }
+  syncing = true; updateCloudUi(); renderSettingsAccount();
+  let up = 0, down = 0;
+  try {
+    const uid = session.user.id;
+
+    /* 1. Bajas pendientes de este dispositivo */
+    for(const kind of ['records','reminders','cats']){
+      const ids = Object.keys(tomb[kind] || {});
+      if(!ids.length) continue;
+      const stamp = new Date().toISOString();
+      try {
+        await upsert(kind, ids.map(id => Object.assign(
+          {user_id:uid, local_id:id, deleted_at:stamp},
+          kind === 'cats'      ? {name:'—'} : {},
+          kind === 'reminders' ? {title:'—'} : {},
+          kind === 'records'   ? {type:'nota', date:isoToday()} : {}
+        )));
+        ids.forEach(id => delete tomb[kind][id]);
+        save('cht_tomb', tomb);
+      } catch(e){ /* se reintentará en la próxima sincronización */ }
+    }
+
+    /* 2. Bajada */
+    const [remoteCats, remoteRecs, remoteRems] = await Promise.all([
+      db('cats',      {query:'?select=*'}),
+      db('records',   {query:'?select=*'}),
+      db('reminders', {query:'?select=*'})
+    ]);
+    const uuidByLocal = {}, localByUuid = {}, remoteAtByLocal = {cats:{}, records:{}, reminders:{}};
+    remoteCats.forEach(r => { uuidByLocal[r.local_id] = r.id; localByUuid[r.id] = r.local_id; });
+
+    for(const r of remoteCats){
+      remoteAtByLocal.cats[r.local_id] = Date.parse(r.updated_at) || 0;
+      const i = gatos.findIndex(c => c.id === r.local_id);
+      if(r.deleted_at){
+        if(i >= 0){ gatos.splice(i,1); down++; }
+        historial = historial.filter(h => h.catId !== r.local_id);
+        continue;
+      }
+      if(i < 0){ gatos.push(rowToCat(r, null)); down++; }
+      else if(remoteAtByLocal.cats[r.local_id] > (gatos[i].u || 0)){ gatos[i] = rowToCat(r, gatos[i]); down++; }
+      const c = gatos.find(x => x.id === r.local_id);
+      if(c && r.photo_path && !c.photo){
+        try {
+          const d = await downloadPhoto(r.photo_path);
+          if(d){ c.photo = d; c.photoPath = r.photo_path; c.photoKey = photoKey(d); }
+        } catch(e){}
+      }
+    }
+    for(const r of remoteRecs){
+      remoteAtByLocal.records[r.local_id] = Date.parse(r.updated_at) || 0;
+      const i = historial.findIndex(h => h.id === r.local_id);
+      if(r.deleted_at){ if(i >= 0){ historial.splice(i,1); down++; } continue; }
+      const catLocal = localByUuid[r.cat_id];
+      if(!catLocal) continue;
+      if(i < 0){ historial.push(rowToRec(r, catLocal)); down++; }
+      else if(remoteAtByLocal.records[r.local_id] > (historial[i].u || 0)){ historial[i] = rowToRec(r, catLocal); down++; }
+    }
+    for(const r of remoteRems){
+      remoteAtByLocal.reminders[r.local_id] = Date.parse(r.updated_at) || 0;
+      const i = recordatorios.findIndex(x => x.id === r.local_id);
+      if(r.deleted_at){ if(i >= 0){ recordatorios.splice(i,1); down++; } continue; }
+      const rem = rowToRem(r, r.cat_id ? localByUuid[r.cat_id] : '');
+      if(i < 0){ recordatorios.push(rem); down++; }
+      else if(remoteAtByLocal.reminders[r.local_id] > (recordatorios[i].u || 0)){ recordatorios[i] = rem; down++; }
+    }
+
+    /* 3. Subida: solo lo que aquí es nuevo o más reciente */
+    const isNewer = (kind, item) => {
+      const at = remoteAtByLocal[kind][item.id];
+      return at === undefined || (item.u || 0) > at;
+    };
+
+    for(const c of gatos){
+      if(c.photo && photoKey(c.photo) !== c.photoKey && isNewer('cats', c)){
+        try { c.photoPath = await uploadPhoto(c); c.photoKey = photoKey(c.photo); } catch(e){}
+      }
+    }
+    const catsToPush = gatos.filter(c => isNewer('cats', c)).slice(0, MAX_CATS);
+    const savedCats = await upsert('cats', catsToPush.map(c => catToRow(c, uid)));
+    up += savedCats.length;
+    savedCats.forEach(r => { uuidByLocal[r.local_id] = r.id; localByUuid[r.id] = r.local_id; });
+
+    const recRows = historial
+      .filter(h => uuidByLocal[h.catId] && isNewer('records', h))
+      .map(h => recToRow(h, uid, uuidByLocal[h.catId]));
+    up += (await upsert('records', recRows)).length;
+
+    const remRows = recordatorios
+      .filter(r => isNewer('reminders', r))
+      .map(r => remToRow(r, uid, r.catId ? uuidByLocal[r.catId] : null));
+    up += (await upsert('reminders', remRows)).length;
+
+    /* 4. Guardar y refrescar */
+    if(currentCat && !catById(currentCat)) currentCat = gatos[0]?.id || null;
+    save(LS.cats, gatos); save(LS.hist, historial); save(LS.rem, recordatorios);
+    settings.currentCat = currentCat; save(LS.set, settings);
+    syncState.last = Date.now(); syncState.error = null; save('cht_sync', syncState);
+    renderAll();
+    if(!silent) toast(t('sync.done',{up, down}));
+  } catch(e){
+    syncState.error = e.message || 'error'; save('cht_sync', syncState);
+    if(!silent) toast(t('sync.error',{msg: syncState.error}));
+    console.warn('sync', e);
+  } finally {
+    syncing = false; updateCloudUi(); renderSettingsAccount();
+  }
+}
+function scheduleSync(){
+  if(!signedIn()) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => syncNow(true), 3000);
+}
+
+/* ── Interfaz de cuenta ── */
+function updateCloudUi(){
+  const b = document.getElementById('hdr-cloud');
+  if(!b) return;
+  b.textContent = syncing ? '🔄' : signedIn() ? '☁️' : '☁︎';
+  b.style.opacity = signedIn() ? '1' : '.6';
+}
+function openAccount(){
+  if(signedIn()){ openModal('modal-settings'); }
+  else { setAuthMode('in'); openModal('modal-auth'); }
+}
+function setAuthMode(mode){
+  authMode = mode;
+  document.getElementById('auth-tab-in').classList.toggle('active', mode === 'in');
+  document.getElementById('auth-tab-up').classList.toggle('active', mode === 'up');
+  document.getElementById('auth-name-group').style.display = mode === 'up' ? '' : 'none';
+  document.getElementById('auth-pass').setAttribute('autocomplete', mode === 'up' ? 'new-password' : 'current-password');
+  document.querySelector('#auth-submit span').textContent = t(mode === 'up' ? 'auth.signup' : 'auth.signin');
+  authMsg('');
+}
+function authMsg(text, kind){
+  const el = document.getElementById('auth-msg');
+  el.className = 'auth-msg' + (text ? ' ' + (kind || 'err') : '');
+  el.textContent = text || '';
+}
+function mapAuthError(e){
+  const m = ((e && e.message) || '').toLowerCase();
+  if(!navigator.onLine || m.indexOf('failed to fetch') >= 0 || m.indexOf('networkerror') >= 0) return t('auth.err_net');
+  if(m.indexOf('already registered') >= 0 || m.indexOf('already been registered') >= 0) return t('auth.err_exists');
+  if(m.indexOf('not confirmed') >= 0) return t('auth.err_unconfirmed');
+  if(m.indexOf('invalid login') >= 0 || m.indexOf('invalid credentials') >= 0) return t('auth.err_creds');
+  return (e && e.message) || t('auth.err_net');
+}
+async function authSubmit(){
+  const email = (document.getElementById('auth-email').value || '').trim();
+  const pass  = document.getElementById('auth-pass').value || '';
+  const name  = (document.getElementById('auth-name').value || '').trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return authMsg(t('auth.err_email'));
+  if(pass.length < 8) return authMsg(t('auth.err_pass'));
+  if(authMode === 'up' && !name) return authMsg(t('auth.err_name'));
+  const btn = document.getElementById('auth-submit');
+  btn.disabled = true; authMsg('');
+  try {
+    if(authMode === 'up'){
+      const r = await signUp(email, pass, name);
+      if(r === 'confirm'){ authMsg(t('auth.ok_signup'), 'info'); btn.disabled = false; return; }
+      if(!settings.username){ settings.username = name; save(LS.set, settings); }
+    } else {
+      await signIn(email, pass);
+    }
+    authMsg(t('auth.ok_signin'), 'ok');
+    updateCloudUi();
+    await syncNow(false);
+    closeModalById('modal-auth');
+    toast(t('auth.merge'));
+  } catch(e){
+    authMsg(mapAuthError(e));
+  } finally {
+    btn.disabled = false;
+  }
+}
+async function authForgot(){
+  const email = (document.getElementById('auth-email').value || '').trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return authMsg(t('auth.err_email'));
+  try { await resetPassword(email); authMsg(t('auth.ok_reset'), 'ok'); }
+  catch(e){ authMsg(mapAuthError(e)); }
+}
+function renderSettingsAccount(){
+  const el = document.getElementById('settings-account');
+  if(!el) return;
+  if(signedIn()){
+    const when = syncState.last
+      ? t('sync.last',{when: new Date(syncState.last).toLocaleString(currentLang === 'es' ? 'es-ES' : 'en-GB')})
+      : t('sync.never');
+    el.innerHTML = `<div class="acct-box">
+      <div class="acct-row">
+        <div class="acct-avatar">☁️</div>
+        <div class="acct-info">
+          <div class="acct-mail">${esc(session.user.email || '')}</div>
+          <div class="acct-state"><span class="sync-dot ${syncing ? 'busy' : syncState.error ? 'off' : ''}"></span>${syncing ? t('sync.syncing') : esc(when)}</div>
+        </div>
+      </div>
+      ${(!syncing && syncState.error) ? `<div class="auth-msg err" style="display:block;margin:10px 0 0">${esc(t('sync.error',{msg:syncState.error}))}</div>` : ''}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+        <button class="btn btn-primary btn-sm" onclick="syncNow(false)">🔄 ${t('sync.now')}</button>
+        <button class="btn btn-ghost btn-sm" onclick="confirmSignOut()">${t('auth.signout')}</button>
+      </div>
+    </div>`;
+  } else {
+    el.innerHTML = `<div class="acct-box">
+      <div class="acct-row">
+        <div class="acct-avatar" style="background:#94a3b8">📱</div>
+        <div class="acct-info">
+          <div class="acct-mail">${t('auth.local_only')}</div>
+          <div class="acct-state"><span class="sync-dot off"></span>${t('auth.local_hint')}</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-sm btn-w" style="margin-top:10px"
+        onclick="closeModalById('modal-settings');setAuthMode('in');openModal('modal-auth')">☁️ ${t('auth.create_now')}</button>
+    </div>`;
+  }
+}
+function confirmSignOut(){
+  if(!confirm(t('auth.confirm_signout'))) return;
+  signOut();
+  toast(t('auth.local_only'));
 }
 
 /* ═══════════════════════════════════════
@@ -3959,6 +5006,8 @@ function renderAll(){
   renderBcsScale();
   renderSymptomChips();
   renderWeekdayPicker();
+  if(typeof renderSettingsAccount === 'function') renderSettingsAccount();
+  if(typeof updateCloudUi === 'function') updateCloudUi();
 }
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.getElementById('splash').classList.add('out'), 1600);
@@ -3979,6 +5028,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ensureAudio();
     document.removeEventListener(ev, once);
   }, {passive:true}));
+
+  updateCloudUi();
+  renderSettingsAccount();
+  if(signedIn()) setTimeout(() => syncNow(true), 1200);
+  window.addEventListener('online', () => { if(signedIn()) syncNow(true); });
+  document.addEventListener('visibilitychange', () => { if(!document.hidden && signedIn()) scheduleSync(); });
 
   if(!localStorage.getItem(LS.onb)) setTimeout(() => openModal('modal-onboard'), 2000);
 

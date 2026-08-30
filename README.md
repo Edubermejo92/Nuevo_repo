@@ -4,7 +4,9 @@ App de gestión, cuidados y salud para gatos. Misma arquitectura y sistema de di
 **TestudoTracker**: un único `index.html` autocontenido (HTML + CSS + JS + datos) que se
 sirve dentro de un WebView (Median.co, Capacitor…) o se usa directamente como PWA.
 
-Sin backend, sin cuentas y sin conexión: todo se guarda en el `localStorage` del dispositivo.
+Funciona **sin conexión y sin cuenta**: todo se guarda en el `localStorage` del dispositivo.
+Opcionalmente, el usuario puede crear una cuenta y sincronizar sus gatos con **Supabase**
+para no perderlos al cambiar de móvil.
 
 ## Contenido
 
@@ -13,9 +15,33 @@ Sin backend, sin cuentas y sin conexión: todo se guarda en el `localStorage` de
 | **Inicio** | Recordatorios del día con interruptor y alarma · selector de mes con consejos estacionales (primavera, verano, otoño e invierno, 8 consejos por estación) |
 | **Razas** | 54 razas agrupadas por región de origen, con peso ideal por sexo, longitud, esperanza de vida, escalas de cepillado/actividad/sociabilidad/vocalidad y fichas de pelaje, alimentación, salud, convivencia y curiosidades |
 | **Comida** | 151 alimentos en 6 categorías (pienso, húmedo, carne y pescado, vegetal, lácteos y huevo, snacks y suplementos) con 4 niveles de idoneidad: apto / ocasional / no dar / **tóxico** · buscador, filtros y calculadora de ración diaria |
-| **Salud** | Perfil del gato con foto · peso, longitud, edad y edad humana · condición corporal frente al rango de su raza · **evaluación automática de si necesita veterinario** · gráfico de peso · últimos registros |
+| **Salud** | Perfil del gato con foto · peso, longitud, edad y edad humana · condición corporal frente al rango de su raza · **evaluación automática de si necesita veterinario** · consejos según sus problemas crónicos · gráfico de peso · últimos registros |
 | **Cuidados** | 9 bloques con más de 70 fichas: alimentación y agua, pelaje y cepillado, arenero, salud preventiva, señales de alarma, conducta, seguridad en casa, viajes, gatitos y senior |
 | **Historial** | Dashboards (peso, longitud y BCS con banda de rango ideal, conteo de vacunas y visitas al veterinario) · **calendario mensual** con próximos avisos · línea de tiempo filtrable |
+
+## Alta guiada del gato
+
+Dar de alta un gato no es un formulario, son 7 pasos con explicación y validación en cada uno,
+y una pantalla final de celebración:
+
+1. **Nombre** e icono identificativo (lo único obligatorio).
+2. **Foto** — se recorta en cuadrado a 400 px y se comprime.
+3. **Raza** — al elegirla se muestra su peso sano por sexo y sus predisposiciones.
+4. **Sexo** y esterilización — determinan el rango de peso y las necesidades calóricas.
+5. **Edad** — fecha exacta o edad aproximada en años y meses; indica la etapa vital
+   y la frecuencia de revisiones que le corresponde.
+6. **Peso** — veredicto inmediato frente al rango de su raza y sexo.
+7. **Problemas de salud crónicos** — «Está sano» o selección entre 18 de los más frecuentes
+   en el gato (renal, piedras urinarias, cistitis idiopática, asma, diabetes, hipertiroidismo,
+   artrosis, cardiopatía, alergias, EII, dental, obesidad, FIV/FeLV, epilepsia, ojos,
+   estreñimiento, hígado) más un campo libre para añadir otros.
+8. **«¡FELICIDADES! Ya has registrado a *(nombre)*»** con su foto y un resumen de la ficha.
+
+Los problemas crónicos no se quedan en un dato: alimentan una tarjeta de consejos específicos
+en el panel de Salud y entran en la evaluación veterinaria (por ejemplo, un gato renal sin
+revisión en más de 6 meses genera una alerta roja).
+
+Editar un gato reutiliza el mismo asistente, precargado y con «Guardar y salir» en cada paso.
 
 ## Funciones
 
@@ -39,12 +65,72 @@ Sin backend, sin cuentas y sin conexión: todo se guarda en el `localStorage` de
 - **Bilingüe** español / inglés, con detección del idioma del dispositivo.
 - **Exportación** de todos los datos a JSON.
 
+## Cuenta y sincronización (Supabase)
+
+La app es **local primero**. Sin cuenta funciona entera; con cuenta, los gatos, registros,
+recordatorios y fotos se sincronizan y se recuperan en cualquier móvil.
+
+- **Registro y acceso** con correo y contraseña, y recuperación de contraseña.
+- **Sincronización automática** al entrar, al recuperar la conexión y 3 segundos después
+  de cada cambio, más un botón «Sincronizar ahora» en Ajustes.
+- **Orden de sincronización**: primero se suben las bajas de este móvil, después se baja lo
+  remoto y por último se sube solo lo que aquí es más nuevo. Ese orden es deliberado: subir
+  antes de bajar resucitaría los gatos borrados desde otro dispositivo.
+- **Borrado lógico** (`deleted_at`) para que las bajas se propaguen entre dispositivos.
+- **Fotos** en un bucket privado de Supabase Storage, en la carpeta del propio usuario.
+- **Sin librerías**: cliente REST propio contra la API de Supabase, coherente con el resto
+  de la app, que no tiene ninguna dependencia de JavaScript.
+
+### Seguridad
+
+Cada tabla tiene RLS activo y políticas `auth.uid() = user_id`. Está verificado contra la
+base de datos real que una cuenta **no puede** leer los gatos de otra, renombrarlos, colgar
+registros de un gato ajeno ni insertar filas a nombre de otro usuario. El límite de 20 gatos
+se aplica también en el servidor mediante un trigger, no solo en la interfaz.
+
+La clave publicable que aparece en `index.html` es pública por diseño: lo que protege los
+datos es RLS, no el secreto de la clave.
+
+### Coste y límites del plan gratuito
+
+Medido sobre la base real: **un usuario con 20 gatos y un año completo de registros
+(3.000 filas) ocupa 1,4 MB**. Con los 500 MB del plan gratuito caben del orden de 350
+usuarios en ese uso máximo, y bastantes más en un uso normal de 1-3 gatos. Coste: **0 €/mes**.
+
+Tres cosas a tener en cuenta antes de publicar la app:
+
+1. **El proyecto se pausa** tras 7 días sin ninguna actividad en el plan gratuito. Con
+   usuarios reales sincronizando no ocurre; si pasa, se reactiva desde el panel de Supabase.
+2. **El correo integrado de Supabase está limitado a unos pocos envíos por hora** y es solo
+   para pruebas. Para una app publicada hay que configurar un SMTP propio (Resend, Brevo y
+   similares tienen plan gratuito), o los correos de confirmación no llegarán a los usuarios.
+3. **La confirmación de correo viene activada** por defecto. La app ya lo contempla: tras
+   registrarse muestra «revisa tu correo y confirma la dirección». Se puede desactivar en
+   Authentication → Providers → Email si prefieres un alta sin fricción.
+
+### Esquema
+
+El esquema vive en el repositorio, no solo en la nube:
+
+```
+supabase/migrations/
+  20260830120500_cat_health_tracker_schema.sql    tablas, índices, triggers, límite de 20 gatos
+  20260830120517_cat_health_tracker_rls.sql       seguridad por filas
+  20260830120529_cat_photos_storage.sql           bucket privado de fotos y sus políticas
+  20260830120547_lock_down_handle_new_user.sql    cierra las funciones SECURITY DEFINER
+  20260830123000_cats_chronic_conditions.sql      problemas crónicos del gato
+```
+
+Para levantarlo en otro proyecto: `supabase db push`, o pegar los archivos en orden en el
+editor SQL. Después, cambia `CLOUD.url` y `CLOUD.key` al principio del `<script>`.
+
 ## Archivos
 
 ```
-index.html        La app completa (~4.000 líneas, sin dependencias externas salvo la fuente)
-manifest.json     Manifiesto PWA
-sw.js             Service worker (caché del shell para uso sin conexión)
+index.html            La app completa (sin dependencias externas salvo la fuente)
+manifest.json         Manifiesto PWA
+sw.js                 Service worker (caché del shell para uso sin conexión)
+supabase/migrations/  Esquema de la base de datos
 ```
 
 ## Uso
@@ -66,6 +152,8 @@ igual que en TestudoTracker.
   TestudoTracker por si quieres volver a ellos.
 - **Afiliados:** la constante `AMAZON_TAG` al principio del `<script>` está vacía. Si pones
   tu etiqueta, se añade automáticamente a todos los enlaces de compra.
+- **Nube:** el objeto `CLOUD` (justo antes de la sección de sincronización) tiene la URL y la
+  clave publicable del proyecto de Supabase. Si lo dejas vacío, la app funciona solo en local.
 - **Idiomas:** añade el código nuevo a cada entrada de `I18N`, a `LANG_FLAGS` / `LANG_CODES`
   y un botón en `#lang-menu`.
 

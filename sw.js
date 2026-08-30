@@ -21,6 +21,21 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;   // fuentes y CDNs: red directa
+
+  // Las fotos de las razas no cambian nunca: primero la copia local, y solo
+  // se piden a la red la primera vez. Asi la pestana de Razas va instantanea
+  // y sigue funcionando sin conexion.
+  if (url.pathname.startsWith('/img/')) {
+    e.respondWith(
+      caches.match(req).then(hit => hit || fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE_VERSION).then(c => c.put(req, copy)).catch(() => {});
+        return res;
+      }).catch(() => hit))
+    );
+    return;
+  }
+
   e.respondWith(
     fetch(req)
       .then(res => {

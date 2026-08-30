@@ -12,6 +12,16 @@ rm -rf "$OUT"
 mkdir -p "$OUT"
 cp index.html manifest.json sw.js "$OUT/"
 
+# Fotos de las razas, si estan descargadas. Son opcionales: sin ellas la app
+# muestra el emoji de cada raza. Se bajan con:
+#   node tools/fetch-breed-photos.mjs
+if [ -d img ]; then
+  cp -r img "$OUT/"
+  echo "Incluidas $(find img -name '*.jpg' | wc -l | tr -d ' ') fotos de razas."
+else
+  echo "Sin fotos de razas (opcional). Para anadirlas: node tools/fetch-breed-photos.mjs"
+fi
+
 # El HTML y el service worker no se cachean: así un redespliegue llega a los
 # usuarios en la siguiente carga, en vez de dejarles una versión vieja.
 cat > "$OUT/_headers" << 'HEADERS'
@@ -23,6 +33,9 @@ cat > "$OUT/_headers" << 'HEADERS'
 
 /manifest.json
   Cache-Control: public, max-age=3600
+
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
 
 /*
   X-Content-Type-Options: nosniff

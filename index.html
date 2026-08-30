@@ -213,6 +213,15 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
 .sp-card{background:#fff;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:.18s;box-shadow:var(--shadow);}
 .sp-card:active{transform:scale(.97);}
 .sp-card-img{height:95px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;font-size:46px;}
+.sp-card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.sp-detail-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.photo-credit{position:absolute;bottom:4px;right:6px;z-index:3;font-size:8.5px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.35);padding:1px 5px;border-radius:4px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.credit-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--border);font-size:11.5px;line-height:1.45;}
+.credit-row:first-child{border-top:none;}
+.credit-thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--tint);}
+.credit-name{font-weight:700;}
+.credit-meta{color:var(--muted);font-size:10.5px;margin-top:2px;}
+.credit-meta a{color:var(--g1);}
 .sp-card-body{padding:8px 10px;}
 .sp-card-name{font-size:12px;font-weight:600;line-height:1.2;}
 .sp-card-latin{font-size:10px;color:var(--muted);font-style:italic;margin-top:2px;}
@@ -1175,6 +1184,16 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
   </div>
 </div>
 
+<!-- Créditos de las fotos -->
+<div class="modal-overlay" id="modal-credits" onclick="closeModal(event,'modal-credits')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModalById('modal-credits')" aria-label="Cerrar">✕</button><div class="modal-handle"></div>
+    <div class="modal-title">📷 <span data-i18n="credits.title">Créditos de las fotos</span></div>
+    <div class="note-box" style="margin:0 0 12px" data-i18n="credits.intro">Las fotos de las razas proceden de Wikimedia Commons. Se listan aquí su autor y su licencia, tal y como exigen las licencias Creative Commons.</div>
+    <div id="credits-content"></div>
+  </div>
+</div>
+
 <!-- Ajustes -->
 <div class="modal-overlay" id="modal-settings" onclick="closeModal(event,'modal-settings')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
@@ -1183,6 +1202,7 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
     <div id="settings-account"></div>
     <div class="form-group"><label data-i18n="form.your_name">Tu nombre</label><input type="text" id="set-name" placeholder="Ej: Eduardo" data-i18n-ph="ph.ex_user"/></div>
     <button class="btn btn-primary btn-w" onclick="saveSettings()"><span data-i18n="btn.save">Guardar</span></button>
+    <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="closeModalById('modal-settings');openCredits()">📷 <span data-i18n="credits.title">Créditos de las fotos</span></button>
     <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="exportData()">📤 <span data-i18n="btn.export">Exportar mis datos</span></button>
     <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="clearAllData()">🗑️ <span data-i18n="btn.delete_all">Borrar todos los datos</span></button>
     <div class="note-box" style="margin:14px 0 0" data-i18n="settings.disclaimer">Cat Health Tracker es una herramienta informativa y de seguimiento. No sustituye el diagnóstico ni el criterio de un veterinario colegiado.</div>
@@ -1582,7 +1602,11 @@ const I18N = {
 "wz.first_weight":{es:"Peso registrado en el alta.",en:"Weight logged at registration."},
 "cond.title":{es:"Sus problemas de salud",en:"Their health conditions"},
 "cond.sub":{es:"Consejos adaptados a lo que tiene",en:"Advice tailored to their conditions"},
-"cond.none":{es:"Sin problemas crónicos registrados.",en:"No chronic conditions recorded."}
+"cond.none":{es:"Sin problemas crónicos registrados.",en:"No chronic conditions recorded."},
+"credits.title":{es:"Créditos de las fotos",en:"Photo credits"},
+"credits.intro":{es:"Las fotos de las razas proceden de Wikimedia Commons. Se listan aquí su autor y su licencia, tal y como exigen las licencias Creative Commons.",en:"Breed photos come from Wikimedia Commons. Their author and licence are listed here, as the Creative Commons licences require."},
+"credits.none":{es:"Todavía no hay fotos instaladas. Ejecuta tools/fetch-breed-photos.mjs para descargarlas.",en:"No photos installed yet. Run tools/fetch-breed-photos.mjs to download them."},
+"credits.source":{es:"ver original",en:"view original"}
 };
 
 let currentLang = 'es';
@@ -3019,7 +3043,7 @@ function renderBreeds(){
       <div class="breed-grid">
         ${bs.map(b => `
           <div class="sp-card" onclick="showBreedDetail('${b.id}')">
-            <div class="sp-card-img" style="background:var(--g-main)">${b.emoji}</div>
+            <div class="sp-card-img" style="background:var(--g-main)">${b.emoji}${breedPhotoTag(b, 'lazy')}</div>
             <div class="sp-card-body">
               <div class="sp-card-name">${esc(breedName(b))}</div>
               <div class="sp-card-latin">${esc(breedOrigin(b))}</div>
@@ -3032,6 +3056,58 @@ function renderBreeds(){
       </div>`;
   }).join('');
 }
+/* ═══════════════════════════════════════
+   FOTOS DE LAS RAZAS
+   Las imágenes viven en img/breeds/{id}.jpg y son opcionales: si el archivo
+   no existe, la etiqueta se borra sola y queda el emoji que hay detrás.
+   Los créditos se cargan de img/breeds/credits.json, que genera el script
+   tools/fetch-breed-photos.mjs junto con las propias fotos.
+   ═══════════════════════════════════════ */
+const BREED_PHOTO_DIR = 'img/breeds/';
+let photoCredits = null;      // null = sin cargar todavía
+
+function breedPhotoTag(b, loading){
+  return `<img src="${BREED_PHOTO_DIR}${b.id}.jpg" alt="${esc(breedName(b))}"
+    loading="${loading}" decoding="async" onerror="this.remove()"/>`;
+}
+function photoCreditTag(b){
+  const c = photoCredits && photoCredits[b.id];
+  if(!c) return '';
+  return `<div class="photo-credit">📷 ${esc(c.author || '—')} · ${esc(c.license || '')}</div>`;
+}
+async function loadPhotoCredits(){
+  if(photoCredits !== null) return photoCredits;
+  try {
+    const res = await fetch(BREED_PHOTO_DIR + 'credits.json');
+    photoCredits = res.ok ? await res.json() : {};
+  } catch(e){ photoCredits = {}; }
+  return photoCredits;
+}
+function openCredits(){
+  openModal('modal-credits');
+  loadPhotoCredits().then(renderCredits);
+}
+function renderCredits(){
+  const el = document.getElementById('credits-content');
+  const ids = Object.keys(photoCredits || {});
+  if(!ids.length){
+    el.innerHTML = `<div class="dash-empty">${t('credits.none')}</div>`;
+    return;
+  }
+  el.innerHTML = ids.map(id => {
+    const c = photoCredits[id];
+    const b = BREED_BY_ID[id];
+    return `<div class="credit-row">
+      <img class="credit-thumb" src="${BREED_PHOTO_DIR}${id}.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"/>
+      <div>
+        <div class="credit-name">${esc(b ? breedName(b) : id)}</div>
+        <div class="credit-meta">📷 ${esc(c.author || '—')} · ${esc(c.license || '')}
+          ${c.source ? ` · <a href="${esc(c.source)}" target="_blank" rel="noopener">${t('credits.source')}</a>` : ''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function meter(label, val){
   return `<div class="meter-row"><span class="meter-lbl">${esc(label)}</span>
     <div class="meter-bar"><div class="meter-fill" style="width:${val*20}%"></div></div>
@@ -3045,8 +3121,9 @@ function showBreedDetail(id){
   dv.classList.add('open');
   const wMin = Math.min(b.wF[0], b.wM[0]), wMax = Math.max(b.wF[1], b.wM[1]);
   document.getElementById('breed-detail-content').innerHTML = `
-    <div class="sp-detail-hero">${b.emoji}
+    <div class="sp-detail-hero">${b.emoji}${breedPhotoTag(b, 'eager')}
       <div class="sp-detail-overlay"></div>
+      ${photoCreditTag(b)}
       <div class="sp-detail-info">
         <div class="sp-detail-name">${esc(breedName(b))}</div>
         <div class="sp-detail-latin">${esc(breedOrigin(b))}</div>
@@ -5018,6 +5095,7 @@ document.addEventListener('DOMContentLoaded', () => {
   onRemFreqChange();
   calSelected = isoToday();
   calCursor = new Date();
+  loadPhotoCredits();
 
   /* Motor de alarmas: comprobación cada 20 s + al volver a la app */
   checkAlarms();

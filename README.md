@@ -65,6 +65,34 @@ Editar un gato reutiliza el mismo asistente, precargado y con «Guardar y salir�
 - **Bilingüe** español / inglés, con detección del idioma del dispositivo.
 - **Exportación** de todos los datos a JSON.
 
+## Fotos de las razas
+
+Las fichas muestran una foto real de cada raza cuando el archivo existe en
+`img/breeds/{id}.jpg`. Si falta, la app cae automáticamente al emoji de la raza,
+así que las fotos son opcionales y nunca rompen nada.
+
+**Por qué no vienen incluidas.** Casi todas las fotos de gatos que circulan por
+internet tienen derechos de autor, y publicar una app con ellas es motivo de
+retirada en Google Play. `tools/fetch-breed-photos.mjs` las descarga de Wikimedia
+Commons, que publica la licencia de cada archivo, **descartando todo lo que no
+permita uso comercial** y guardando el autor de cada foto para poder citarlo.
+
+```bash
+node tools/fetch-breed-photos.mjs   # descarga las fotos y genera credits.json
+bash build.sh                       # deja dist/ listo, con las fotos dentro
+```
+
+No necesita instalar nada (usa el `fetch` de Node 18+ y pide a Wikimedia la
+miniatura ya redimensionada). Al terminar informa de qué razas se quedaron sin
+foto y por qué. Para cualquiera de ellas puedes poner una imagen propia en
+`img/breeds/<id>.jpg` y añadir su autor y licencia a `img/breeds/credits.json`.
+
+**Atribución.** Las licencias Creative Commons obligan a citar al autor. La app
+lo hace en dos sitios: un crédito discreto sobre la foto en la ficha de cada raza,
+y una pantalla completa en *Ajustes → Créditos de las fotos*, con autor, licencia
+y enlace al original. Si sustituyes una foto, actualiza también su entrada en
+`credits.json`.
+
 ## Cuenta y sincronización (Supabase)
 
 La app es **local primero**. Sin cuenta funciona entera; con cuenta, los gatos, registros,
@@ -178,6 +206,8 @@ index.html            La app completa (sin dependencias externas salvo la fuente
 manifest.json         Manifiesto PWA
 sw.js                 Service worker (caché del shell para uso sin conexión)
 build.sh              Genera dist/ con los archivos publicables + _headers y _redirects
+tools/                Script de descarga de las fotos de las razas
+img/breeds/           Fotos de las razas (opcional, lo genera el script)
 netlify.toml          Configuración de despliegue
 supabase/migrations/  Esquema de la base de datos
 ```

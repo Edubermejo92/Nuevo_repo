@@ -131,8 +131,9 @@ funcionan desde `file://`**, y la recuperación de contraseña de Supabase neces
 a la que volver. Además, si el WebView apunta a la URL en vez de empaquetar el archivo,
 puedes corregir contenido sin pasar por la revisión de Google Play.
 
-El sitio `cathealthtracker` ya está creado en Netlify. `netlify.toml` copia a `dist/` solo
-los tres archivos de la app, así que el README y las migraciones no se publican.
+**La app está publicada en https://cathealthtrackerapp.netlify.app** (equipo EBLDigital,
+site ID `a130d2b2-264d-4ca1-9ba9-f9edebd9d2aa`), desplegada de forma manual con Netlify Drop.
+Solo se publica el contenido de `dist/`: el README y las migraciones se quedan fuera.
 
 **Opción A — subida manual (arrastrar y soltar).** Genera la carpeta:
 
@@ -140,15 +141,15 @@ los tres archivos de la app, así que el README y las migraciones no se publican
 bash build.sh          # crea dist/
 ```
 
-Y arrastra la carpeta `dist/` (o su contenido comprimido en un .zip) a
-[app.netlify.com/drop](https://app.netlify.com/drop), o al área de *Deploys* del sitio
-*cathealthtracker* si quieres conservar la misma URL.
+Y arrastra la carpeta `dist/` (o su contenido comprimido en un .zip) al área de *Deploys*
+del sitio *cathealthtrackerapp*, para conservar la misma URL. Soltarla en
+[app.netlify.com/drop](https://app.netlify.com/drop) crearía un sitio nuevo cada vez.
 
 Importante: arrastra `dist/`, **no** la carpeta del repositorio. En un despliegue manual
 Netlify no ejecuta la sección `[build]` de `netlify.toml`; por eso las cabeceras y las rutas
 viven en `_headers` y `_redirects`, que `build.sh` deja dentro de `dist/` y sí se aplican.
 
-**Opción B — conectar el repositorio.** En Netlify → *cathealthtracker* → *Import from Git*,
+**Opción B — conectar el repositorio.** En Netlify → *cathealthtrackerapp* → *Import from Git*,
 elige este repositorio y la rama. Netlify lee `netlify.toml`, ejecuta `build.sh` y despliega
 solo con hacer push. Es la más cómoda a medio plazo.
 
@@ -157,7 +158,7 @@ solo con hacer push. Es la más cómoda a medio plazo.
 ```bash
 npm i -g netlify-cli
 netlify login
-netlify link --id 983edca2-004e-4546-9a51-7019274ac634
+netlify link --id a130d2b2-264d-4ca1-9ba9-f9edebd9d2aa
 netlify deploy --build --prod
 ```
 
@@ -165,8 +166,8 @@ netlify deploy --build --prod
 
 En el panel de Supabase → **Authentication → URL Configuration**:
 
-- **Site URL**: `https://cathealthtracker.netlify.app`
-- **Redirect URLs**: añade `https://cathealthtracker.netlify.app/**`
+- **Site URL**: `https://cathealthtrackerapp.netlify.app`
+- **Redirect URLs**: añade `https://cathealthtrackerapp.netlify.app/**`
 
 Sin esto, el enlace del correo de «He olvidado mi contraseña» no lleva a ninguna parte.
 

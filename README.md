@@ -134,11 +134,25 @@ puedes corregir contenido sin pasar por la revisión de Google Play.
 El sitio `cathealthtracker` ya está creado en Netlify. `netlify.toml` copia a `dist/` solo
 los tres archivos de la app, así que el README y las migraciones no se publican.
 
-**Opción A — conectar el repositorio (recomendada).** En Netlify → *cathealthtracker* →
-*Import from Git*, elige este repositorio y la rama. Netlify lee `netlify.toml` y despliega
-solo con hacer push.
+**Opción A — subida manual (arrastrar y soltar).** Genera la carpeta:
 
-**Opción B — desde tu ordenador**, en la carpeta del repositorio:
+```bash
+bash build.sh          # crea dist/
+```
+
+Y arrastra la carpeta `dist/` (o su contenido comprimido en un .zip) a
+[app.netlify.com/drop](https://app.netlify.com/drop), o al área de *Deploys* del sitio
+*cathealthtracker* si quieres conservar la misma URL.
+
+Importante: arrastra `dist/`, **no** la carpeta del repositorio. En un despliegue manual
+Netlify no ejecuta la sección `[build]` de `netlify.toml`; por eso las cabeceras y las rutas
+viven en `_headers` y `_redirects`, que `build.sh` deja dentro de `dist/` y sí se aplican.
+
+**Opción B — conectar el repositorio.** En Netlify → *cathealthtracker* → *Import from Git*,
+elige este repositorio y la rama. Netlify lee `netlify.toml`, ejecuta `build.sh` y despliega
+solo con hacer push. Es la más cómoda a medio plazo.
+
+**Opción C — desde tu ordenador con la CLI**, en la carpeta del repositorio:
 
 ```bash
 npm i -g netlify-cli
@@ -162,6 +176,8 @@ Sin esto, el enlace del correo de «He olvidado mi contraseña» no lleva a ning
 index.html            La app completa (sin dependencias externas salvo la fuente)
 manifest.json         Manifiesto PWA
 sw.js                 Service worker (caché del shell para uso sin conexión)
+build.sh              Genera dist/ con los archivos publicables + _headers y _redirects
+netlify.toml          Configuración de despliegue
 supabase/migrations/  Esquema de la base de datos
 ```
 

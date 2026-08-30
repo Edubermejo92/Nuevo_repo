@@ -124,6 +124,38 @@ supabase/migrations/
 Para levantarlo en otro proyecto: `supabase db push`, o pegar los archivos en orden en el
 editor SQL. Después, cambia `CLOUD.url` y `CLOUD.key` al principio del `<script>`.
 
+## Publicación web (Netlify)
+
+Servir la app por HTTPS no es cosmético: **el dictado por voz y las notificaciones no
+funcionan desde `file://`**, y la recuperación de contraseña de Supabase necesita una URL
+a la que volver. Además, si el WebView apunta a la URL en vez de empaquetar el archivo,
+puedes corregir contenido sin pasar por la revisión de Google Play.
+
+El sitio `cathealthtracker` ya está creado en Netlify. `netlify.toml` copia a `dist/` solo
+los tres archivos de la app, así que el README y las migraciones no se publican.
+
+**Opción A — conectar el repositorio (recomendada).** En Netlify → *cathealthtracker* →
+*Import from Git*, elige este repositorio y la rama. Netlify lee `netlify.toml` y despliega
+solo con hacer push.
+
+**Opción B — desde tu ordenador**, en la carpeta del repositorio:
+
+```bash
+npm i -g netlify-cli
+netlify login
+netlify link --id 983edca2-004e-4546-9a51-7019274ac634
+netlify deploy --build --prod
+```
+
+### Después del primer despliegue: configura Supabase
+
+En el panel de Supabase → **Authentication → URL Configuration**:
+
+- **Site URL**: `https://cathealthtracker.netlify.app`
+- **Redirect URLs**: añade `https://cathealthtracker.netlify.app/**`
+
+Sin esto, el enlace del correo de «He olvidado mi contraseña» no lleva a ninguna parte.
+
 ## Archivos
 
 ```

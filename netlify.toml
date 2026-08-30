@@ -1,0 +1,42 @@
+# Cat Health Tracker — configuración de Netlify
+#
+# La app son tres archivos estáticos. El resto del repositorio (README,
+# migraciones de Supabase) no se publica: solo se copia a dist/ lo que
+# forma parte de la app.
+
+[build]
+  publish = "dist"
+  command = "mkdir -p dist && cp index.html manifest.json sw.js dist/"
+
+# El HTML y el service worker nunca se cachean: así, al redesplegar,
+# los usuarios reciben la versión nueva en la siguiente carga en vez de
+# quedarse con una copia vieja durante horas.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    # El dictado por voz necesita el micrófono desde el propio origen.
+    Permissions-Policy = "microphone=(self), camera=(self), geolocation=()"
+
+# La app es de una sola página: cualquier ruta desconocida sirve la app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -79,8 +79,14 @@ permita uso comercial** y guardando el autor de cada foto para poder citarlo.
 
 ```bash
 node tools/fetch-breed-photos.mjs   # descarga las fotos y genera credits.json
-bash build.sh                       # deja dist/ listo, con las fotos dentro
+node build.mjs                      # deja dist/ listo, con las fotos dentro
 ```
+
+Estos dos comandos son idénticos en Windows (PowerShell o cmd), macOS y Linux:
+son scripts de Node, no de bash. **Hace falta tener el repositorio completo**
+descargado (no solo la carpeta `dist/` de un despliegue anterior), porque
+`tools/` y `build.mjs` no forman parte de lo que se publica en Netlify — ver
+[«Publicación web»](#publicación-web-netlify) más abajo para cómo bajarlo.
 
 No necesita instalar nada (usa el `fetch` de Node 18+ y pide a Wikimedia la
 miniatura ya redimensionada). Al terminar informa de qué razas se quedaron sin
@@ -161,13 +167,28 @@ puedes corregir contenido sin pasar por la revisión de Google Play.
 
 **La app está publicada en https://cathealthtrackerapp.netlify.app** (equipo EBLDigital,
 site ID `a130d2b2-264d-4ca1-9ba9-f9edebd9d2aa`), desplegada de forma manual con Netlify Drop.
-Solo se publica el contenido de `dist/`: el README y las migraciones se quedan fuera.
+Solo se publica el contenido de `dist/`: el README, `tools/` y las migraciones se quedan fuera.
 
-**Opción A — subida manual (arrastrar y soltar).** Genera la carpeta:
+**Importante: dos carpetas distintas, no las confundas.**
+
+- **El repositorio** (este proyecto entero: `index.html`, `build.mjs`, `tools/`,
+  `README.md`...). Es lo que necesitas para *generar* el sitio o para descargar las fotos
+  de las razas. Se descarga con `git clone`, o como .zip desde GitHub
+  (botón verde *Code → Download ZIP* en la página del repositorio).
+- **`dist/`** (5-6 archivos: `index.html`, `manifest.json`, `sw.js`, `_headers`,
+  `_redirects`, y `img/` si hay fotos). Es lo único que *se sube* a Netlify, y se genera
+  a partir del repositorio con `node build.mjs`. Un .zip de `dist/` no sirve para ejecutar
+  `tools/fetch-breed-photos.mjs`: no tiene ese archivo.
+
+**Opción A — subida manual (arrastrar y soltar).** Con el repositorio completo descargado,
+en su carpeta:
 
 ```bash
-bash build.sh          # crea dist/
+node build.mjs          # crea dist/ (funciona igual en Windows, macOS y Linux)
 ```
+
+*(`bash build.sh` hace exactamente lo mismo si prefieres bash y lo tienes instalado —
+en Windows necesitarías Git Bash o WSL; `node build.mjs` no depende de nada de eso.)*
 
 Y arrastra la carpeta `dist/` (o su contenido comprimido en un .zip) al área de *Deploys*
 del sitio *cathealthtrackerapp*, para conservar la misma URL. Soltarla en
@@ -175,11 +196,12 @@ del sitio *cathealthtrackerapp*, para conservar la misma URL. Soltarla en
 
 Importante: arrastra `dist/`, **no** la carpeta del repositorio. En un despliegue manual
 Netlify no ejecuta la sección `[build]` de `netlify.toml`; por eso las cabeceras y las rutas
-viven en `_headers` y `_redirects`, que `build.sh` deja dentro de `dist/` y sí se aplican.
+viven en `_headers` y `_redirects`, que `build.mjs` deja dentro de `dist/` y sí se aplican.
 
 **Opción B — conectar el repositorio.** En Netlify → *cathealthtrackerapp* → *Import from Git*,
-elige este repositorio y la rama. Netlify lee `netlify.toml`, ejecuta `build.sh` y despliega
-solo con hacer push. Es la más cómoda a medio plazo.
+elige este repositorio y la rama. Netlify lee `netlify.toml`, ejecuta `node build.mjs` y
+despliega solo con hacer push. Es la más cómoda a medio plazo: no hay que descargar ni
+arrastrar nada nunca más.
 
 **Opción C — desde tu ordenador con la CLI**, en la carpeta del repositorio:
 
@@ -205,7 +227,8 @@ Sin esto, el enlace del correo de «He olvidado mi contraseña» no lleva a ning
 index.html            La app completa (sin dependencias externas salvo la fuente)
 manifest.json         Manifiesto PWA
 sw.js                 Service worker (caché del shell para uso sin conexión)
-build.sh              Genera dist/ con los archivos publicables + _headers y _redirects
+build.mjs             Genera dist/ con los archivos publicables + _headers y _redirects
+build.sh              Lo mismo que build.mjs, para quien prefiera bash (no en Windows)
 tools/                Script de descarga de las fotos de las razas
 img/breeds/           Fotos de las razas (opcional, lo genera el script)
 netlify.toml          Configuración de despliegue

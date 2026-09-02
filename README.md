@@ -344,6 +344,28 @@ npx http-server -p 8080 .
 Para empaquetar como app Android/iOS, apunta el WebView (Median.co u otro) a `index.html`,
 igual que en TestudoTracker.
 
+## Logo e iconos
+
+El favicon, el icono de la cabecera y el de la pantalla de splash salen de un recorte
+cuadrado (cara del gato, centrada) del logo real de la app — un boceto a lápiz sobre papel
+con el texto «Cat Health Tracker». Todo va **incrustado como `data:` URI**, igual que el resto
+de la app: sin archivos de imagen sueltos para esto.
+
+- **Formato:** JPEG en vez de PNG para los tamaños grandes. Un PNG sin pérdida de un boceto
+  detallado con textura de papel pesa 7-8 veces más (el de 512 px pasaba de 66 KB a 483 KB);
+  a esta calidad de boceto, JPEG no se nota y ahorra bastante en un archivo que se descarga
+  entero en cada visita. Los favicons de 16/32 px se quedan en PNG (más nítidos en ese tamaño)
+  y con un punto extra de contraste, porque a 16 px el trazo fino del lápiz se difumina.
+- **Versión "maskable"**: `manifest.json` incluye una variante con ~22 % de margen relleno
+  del mismo tono de papel del propio logo, para que un marco circular o squircle de Android
+  no le corte las orejas al gato.
+- **Si cambias el logo**, la fuente y el recorte exacto quedan documentados (no versionados,
+  por peso) en el historial de esta conversación; en resumen: recorta un cuadrado centrado en
+  la cara, guarda una copia con ~22 % de margen relleno del color de fondo para la versión
+  maskable, exporta ambas a varios tamaños en JPEG (o PNG para 16/32 px) y sustituye los
+  `data:` URI de `<link rel="icon">`, `<link rel="apple-touch-icon">`, `.hdr-logo img`,
+  `.splash-logo img` en `index.html`, y el array `icons` de `manifest.json`.
+
 ## Personalización
 
 - **Color:** los cuatro tonos de la marca están en `:root` (`--g1` … `--g4`) al principio

@@ -1,7 +1,8 @@
 /* Cat Health Tracker — service worker mínimo.
    Cachea el shell de la app para que funcione sin conexión.
-   Sube CACHE_VERSION cada vez que publiques una versión nueva. */
-const CACHE_VERSION = 'cht-v2';
+   Sube CACHE_VERSION (a la par de APP_VERSION en index.html) cada vez
+   que publiques una versión nueva. */
+const CACHE_VERSION = 'cht-1.2.0';
 const ASSETS = ['index.html', 'manifest.json'];
 
 self.addEventListener('install', e => {

@@ -1206,6 +1206,7 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
     <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="exportData()">📤 <span data-i18n="btn.export">Exportar mis datos</span></button>
     <button class="btn btn-ghost btn-w" style="margin-top:8px" onclick="clearAllData()">🗑️ <span data-i18n="btn.delete_all">Borrar todos los datos</span></button>
     <div class="note-box" style="margin:14px 0 0" data-i18n="settings.disclaimer">Cat Health Tracker es una herramienta informativa y de seguimiento. No sustituye el diagnóstico ni el criterio de un veterinario colegiado.</div>
+    <div id="settings-version" style="text-align:center;font-size:10.5px;color:var(--muted2);margin-top:12px"></div>
   </div>
 </div>
 
@@ -1216,6 +1217,11 @@ html,body{height:100%;background:var(--bg);font-family:'Inter',system-ui,-apple-
    Arquitectura de un solo archivo (igual que TestudoTracker):
    HTML + CSS + JS + datos, persistencia en localStorage.
    ═══════════════════════════════════════════════════════════ */
+
+/* Versión de la app. Súbela junto a CACHE_VERSION en sw.js cada vez que
+   publiques una versión nueva, y anota el cambio en el README. */
+const APP_VERSION = '1.2.0';
+const APP_VERSION_NAME = 'Siberiano';
 
 /* Etiqueta de afiliado de Amazon. Déjala vacía para enlaces limpios. */
 const AMAZON_TAG = '';
@@ -2684,6 +2690,8 @@ function openModal(id){
     document.getElementById('set-name').value = settings.username || '';
     renderSettingsAccount();
     renderSettingsCatsList();
+    const v = document.getElementById('settings-version');
+    if(v) v.textContent = 'Cat Health Tracker v' + APP_VERSION + ' · ' + APP_VERSION_NAME;
   }
   if(id === 'modal-reminder') renderCatSelect('rm-cat', true);
 }

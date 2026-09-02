@@ -1,6 +1,7 @@
 {
   "name": "Cat Health Tracker",
   "short_name": "CatHealth",
+  "version": "1.2.0",
   "description": "Guía completa de razas, alimentación, cuidados y salud para tu gato, con recordatorios y calendario.",
   "start_url": "index.html",
   "scope": "./",

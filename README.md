@@ -8,6 +8,21 @@ Funciona **sin conexión y sin cuenta**: todo se guarda en el `localStorage` del
 Opcionalmente, el usuario puede crear una cuenta y sincronizar sus gatos con **Supabase**
 para no perderlos al cambiar de móvil.
 
+**Versión actual: v1.2.0 "Siberiano"** — visible en Ajustes dentro de la propia app.
+
+## Versiones
+
+Cada versión nueva sube `APP_VERSION` / `APP_VERSION_NAME` en `index.html` y
+`CACHE_VERSION` en `sw.js` a la vez (si no, el service worker sigue sirviendo la caché
+vieja). El nombre de cada versión es una raza del catálogo de la app, elegida por algo
+del propio release.
+
+| Versión | Nombre | Qué trae |
+|---|---|---|
+| **1.2.0** | Siberiano — *«sigue a su humano por la casa»* | Notificaciones push en segundo plano: los avisos llegan aunque la app esté cerrada |
+| 1.1.0 | — | Cuenta y sincronización con Supabase, alta guiada del gato en 7 pasos, fotos reales de las razas |
+| 1.0.0 | — | Lanzamiento inicial: razas, alimentación, cuidados, salud, calendario y recordatorios locales |
+
 ## Contenido
 
 | Pestaña | Qué incluye |
